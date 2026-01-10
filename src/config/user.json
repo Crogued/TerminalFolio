@@ -1,18 +1,48 @@
 {
-    "name": "[Your Name]",
-    "email": "[Your Email]",
-    "bio": "[Short Bio]",
-    "resume": "[Your Resume Link]",
+    "name": "Christian Rodrigues",
+    "email": "christian.rodrigues@example.com",
+    "bio": "Sou o Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
+    "resume": "https://www.linkedin.com/in/crogued/",
     "socials": {
-      "github": "[Your GitHub Link]",
-      "linkedin": "[Your LinkedIn Link]",
-      "twitter": "[Your Twitter Link]"
+      "github": "https://github.com/Crogued",
+      "linkedin": "https://www.linkedin.com/in/crogued/"
     },
     "projects": [
       {
-        "name": "[Project Name]",
-        "description": "[Short Project Description]",
-        "link": "[Project Link]"
+        "name": "Naval-Rex 2025",
+        "description": "1.º Lugar no desafio da Escola Naval. Construção de barco com materiais recicláveis, focado em Team Building e resolução de problemas.",
+        "link": "https://github.com/Crogued"
+      },
+      {
+        "name": "VisionNavigation",
+        "description": "Sistema autónomo de USV para navegação por bóias usando Visão por Computador (Raspberry Pi + Arduino).",
+        "link": "https://github.com/Crogued/BuoyVisionNavigation"
+      },
+      {
+        "name": "ProjetUSVautodrone",
+        "description": "Participação na competição Autodrone 2026. Veículo de superfície não tripulado.",
+        "link": "https://github.com/Bolofofopt/ProjetUSVautodrone"
+      },
+      {
+        "name": "VectorNavigation",
+        "description": "Sistema de controlo autónomo de USV usando Navegação Vetorial e coordenadas GPS. Powered by Arduino Mega.",
+        "link": "https://github.com/Crogued/VectorNavigation"
+      },
+      {
+        "name": "HumanoidRoboticArm",
+        "description": "Braço robótico de 2DoF com mão humanóide de 5 DoF que imita comportamento humano por visão.",
+        "link": "https://github.com/Bolofofopt/HumanoidRoboticArmVision"
+      },
+      {
+        "name": "Bluetooth-RC-Car",
+        "description": "Carro RC controlado por Bluetooth com stream de vídeo ESP32-CAM, desvio de obstáculos e movimento omnidirecional.",
+        "link": "https://github.com/Crogued/Bluetooth-RC-Car"
       }
-    ]
+    ],
+    "details": {
+      "history": "Nasci na Venezuela, onde vivi até aos 13 anos. Depois emigrei com a minha família para o Chile, adaptando-me a uma nova cultura durante a adolescência. A maior prova chegou aos meus 17 anos: emigrámos para Portugal e aterrei em Oeiras em março de 2020, apenas uns dias antes de o aeroporto fechar e começar o confinamento mundial. Longe de me isolar, aproveitei esse tempo para mergulhar no código e aprender a língua, conseguindo uma adaptação total. Hoje sou trilingue (Espanhol, Português, Inglês) e considero Oeiras a minha casa.",
+      "resilience": "Sempre fui desportista. Comecei no Karaté aos 6 anos e futebol federado dos 9 aos 17. Ao chegar a Portugal, o meu talento abriu portas: fui selecionado para provas nos clubes CRC Carcavelos e Porto Salvo. No entanto, a realidade económica impôs-se. Os meus pais não podiam custear os meus estudos universitários, por isso tive de tomar uma decisão difícil: renunciar ao futebol de competição para trabalhar e pagar as propinas. Trabalhei na Caseking Iberia (montagem de PCs) e na restauração (Hamburgueria do Bairro) enquanto estudava. Essa disciplina desportiva aplico-a agora na minha engenharia.",
+      "merit": "Acredito em devolver valor à comunidade. Fui Monitor no programa 'Jovens em Movimento 2025' da Câmara Municipal de Oeiras. Supervisionei grupos de jovens e geri dinâmicas de grupo, o que me ajudou a desenvolver inteligência emocional e liderança. Sou considerado um membro ativo e relevante na minha comunidade académica (tenho 2 cartas de recomendação).",
+      "goals": "O meu objetivo é integrar-me no ecossistema científico de Oeiras Valley como especialista em Biomedicina. Se obtiver a Bolsa de Mérito, investirei os fundos em duas áreas estratégicas:\n\n1. Hardware: Aquisição de GPUs e sensores para treinar modelos de IA e visão por computador em casa.\n2. Formação: Pagar certificações avançadas em Data Science e Machine Learning para complementar a minha licenciatura."
+    }
 }

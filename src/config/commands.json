@@ -1,22 +1,9 @@
 {
-  "specialCommands": {
-    "whois": {
-      "description": "Displays information about a user",
-      "output": "User information output"
+    "title": "Christian Rodrigues | Portfólio",
+    "description": "Bem-vindo ao Portfólio de Christian Rodrigues.\nEscreva 'ajuda' ou 'help' para ver os comandos disponíveis.",
+    "socials": {
+        "github": "https://github.com/Crogued",
+        "linkedin": "https://www.linkedin.com/in/crogued/"
     },
-    "social": {
-      "description": "Displays social media links",
-      "output": "Social media links output"
-    },
-    "projects": {
-      "description": "Displays a list of projects",
-      "output": "Projects list output"
-    }
-  },
-  "generalCommands": {
-    "echo": {
-      "description": "Repeats the input text",
-      "output": "pika pika"
-    }
-  }
+    "specialCommands": {}
 }

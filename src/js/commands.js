@@ -4,85 +4,100 @@ export const generalCommands = {
       clearTerminal();
       return null;
     },
-    description: "Clear terminal. 🧹 Keep it tidy! 😊"
+    description: "Limpar o terminal. 🧹 Mantenha-o arrumado! 😊"
   },
   echo: {
     execute: (args) => {
       return args.join(" ");
     },
-    description: "Echo back your text. 🔊 Like shouting in a canyon! 🏔️"
+    description: "Ecoar o seu texto. 🔊 Como gritar num desfiladeiro! 🏔️"
   },
   date: {
     execute: () => {
       return new Date().toString();
     },
-    description: "Display current date and time. ⏰ Time flies! ⏱️"
+    description: "Mostrar data e hora. ⏰ O tempo voa! ⏱️"
   },
   ls: {
     execute: () => {
-      return "commands.json\nindex.html\nREADME.md\nscript.js\nstyles.css\nterminal.png";
+      return "bio.txt\nhistoria.txt\nresiliencia.txt\nmerito.txt\nmetas.txt\nprojetos.txt\ncommands.json\nindex.html\nREADME.md\nscript.js\nstyles.css\n";
     },
-    description: "List files in the directory. 📁 What's in here? 🔍"
+    description: "Listar ficheiros. 📁 O que há aqui? 🔍"
   },
   pwd: {
     execute: () => {
-      return "/home/visitor/kom";
+      return "/home/visitor/oeiras_valley";
     },
-    description: "Print working directory. 📍 Where am I? 🗺️"
+    description: "Mostrar diretório atual. 📍 Onde estou? 🗺️"
   },
   cat: {
     execute: (args) => {
       if (args.length === 0) {
-        return "Usage: cat [filename]";
+        return "Uso: cat [nome_do_ficheiro]";
       }
       
-      const filename = args[0];
+      const filename = args[0].toLowerCase();
+      // Access userData globally assuming it's available
       const files = {
-        "readme.md": "# KomPortfolioShell\n\nA terminal-like portfolio page for Kom Senapati.",
-        "commands.json": "This file contains all the special commands for this terminal."
+        "readme.md": "# Portfólio Terminal\n\nUma página de portfólio estilo terminal para Christian Rodrigues.",
+        "bio.txt": userData.bio,
+        "historia.txt": userData.details?.history || "História não disponível.",
+        "resiliencia.txt": userData.details?.resilience || "Info de resiliência não disponível.",
+        "merito.txt": userData.details?.merit || "Info de mérito não disponível.",
+        "metas.txt": userData.details?.goals || "Metas não disponíveis.",
+        "projetos.txt": "Use o comando 'projetos' para uma melhor visualização.",
+        "commands.json": "Este ficheiro contém os comandos especiais para este terminal."
       };
       
-      if (files[filename.toLowerCase()]) {
-        return files[filename.toLowerCase()];
+      if (files[filename]) {
+        return files[filename];
       } else {
-        return `cat: ${filename}: No such file or directory`;
+        return `cat: ${filename}: Ficheiro ou diretório inexistente`;
       }
     },
-    description: "Display file contents. 📄 What's inside? 👀"
+    description: "Mostrar conteúdo de ficheiros. 📄 O que está dentro? 👀"
   },
   man: {
     execute: (args) => {
       if (args.length === 0) {
-        return "What manual page do you want? Try 'man [command]'";
+        return "Que manual quer ver? Tente 'man [comando]'";
       }
       
       const command = args[0];
       
       if (generalCommands[command]) {
-        return `NAME\n    ${command} - ${generalCommands[command].description}\n\nDESCRIPTION\n    ${getManualDescription(command)}`;
+        return `NOME\n    ${command} - ${generalCommands[command].description}\n\nDESCRIÇÃO\n    ${getManualDescription(command)}`;
       } else if (specialCommands[command]) {
-        return `NAME\n    ${command} - ${specialCommands[command].description}\n\nDESCRIPTION\n    A special command that provides information about Kom's portfolio.`;
+        return `NOME\n    ${command} - ${specialCommands[command].description}\n\nDESCRIÇÃO\n    Comando especial do portfólio.`;
       } else {
-        return `No manual entry for ${command}`;
+        return `Sem entrada manual para ${command}`;
       }
     },
-    description: "Display manual for a command. 📚 Need help? 🆘"
+    description: "Manual do comando. 📚 Precisa de ajuda? 🆘"
   },
   uname: {
     execute: () => {
-      return "KomShell";
+      return "Linux (Oeiras Valley Edition)";
     },
-    description: "Print system information. 💻 What am I running on? 🖥️"
+    description: "Informação do sistema. 💻 Onde estou a correr? 🖥️"
   },
   history: {
     execute: () => {
-      return commandHistory.join("\n") || "No commands in history yet";
+      return commandHistory.join("\n") || "Ainda sem histórico";
     },
-    description: "Show command history. 📜 What did I type before? 🔍"
+    description: "Histórico de comandos. 📜 O que escrevi antes? 🔍"
   },
   help: {
     execute: () => {
-      let output = "<table>";
+      let output = "<div><strong>Comandos Sugeridos:</strong></div>";
+      output += "<table>";
+      output += `<tr><td class="available-command">sobre</td><td class="command-description">Quem sou, a minha história e resiliência.</td></tr>`;
+      output += `<tr><td class="available-command">projetos</td><td class="command-description">Os meus projetos técnicos e competições.</td></tr>`;
+      output += `<tr><td class="available-command">metas</td><td class="command-description">Objetivos para a Bolsa de Mérito e futuro.</td></tr>`;
+      output += `<tr><td class="available-command">merito</td><td class="command-description">Envolvimento comunitário e voluntariado.</td></tr>`;
+      output += "</table><br>";
+      
+      output += "<div><strong>Todos os Comandos:</strong></div><table>";
       // Add general commands
       for (let cmd in generalCommands) {
         output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
@@ -94,51 +109,87 @@ export const generalCommands = {
       output += "</table>";
       return output;
     },
-    description: "You know what this does. 🙄 Want some hints? 😏"
+    description: "Lista de comandos. ❓ Pistas e ajuda! 😏"
+  },
+  ajuda: {
+    execute: () => {
+      return generalCommands.help.execute();
+    },
+    description: "O mesmo que 'help'. 🇵🇹"
   },
   banner: {
     execute: () => {
       return header;
     },
-    description: "Display the welcome banner. 👋 Hello again! 🎉"
+    description: "Mostrar o banner de boas-vindas. 👋 Olá de novo! 🎉"
+  },
+  sobre: {
+    execute: () => {
+       if (!isUserDataAvailable()) return "Dados não disponíveis.";
+       return `
+<strong>QUEM SOU:</strong>
+${userData.bio}
+
+<strong>A MINHA HISTÓRIA:</strong>
+${userData.details?.history}
+
+<strong>SACRIFÍCIO E RESILIÊNCIA:</strong>
+${userData.details?.resilience}
+       `.trim();
+    },
+    description: "A minha história completa. 📖 Ler tudo sobre mim."
+  },
+  merito: {
+    execute: () => {
+       if (!isUserDataAvailable("details")) return "Dados não disponíveis.";
+       return `<strong>MÉRITO SOCIAL:</strong>\n${userData.details.merit}`;
+    },
+    description: "Atividades de mérito social. 🤝"
+  },
+  metas: {
+    execute: () => {
+       if (!isUserDataAvailable("details")) return "Dados não disponíveis.";
+       return `<strong>AS MINHAS METAS:</strong>\n${userData.details.goals}`;
+    },
+    description: "Objetivos e metas futuras. 🎯"
   },
   whois : {
     execute: () => {
       if (!isUserDataAvailable()) {
-        return "🚨 ALERT! 🚨\nIt seems like I have amnesia... My user data has mysteriously vanished into the void! 🌌👀\nTry reloading or summoning the data wizard. 🧙‍♂️✨";
+        return "🚨 ALERTA! 🚨\nDados do utilizador não encontrados! 🌌👀";
       }
-      return `    Name: ${userData.name}\n    Email: ${userData.email}\n    Bio: ${userData.bio}`;
+      return `    Nome: ${userData.name}\n    Email: ${userData.email}\n    Bio: ${userData.bio}`;
     },
-    description: "Display user information. 🙋 Who am I? 🤔"
+    description: "Info do utilizador. 🙋 Quem sou eu? 🤔"
   },
   social : {
     execute: () => {
       if (!isUserDataAvailable("socials")) {
-        return "😱 OH NO! \nIt looks like my social links got lost in the multiverse! 🌀🔮\nMaybe they're chilling in another dimension. 🚀";
+        return "😱 OH NÃO! \nLinks sociais perdidos! 🌀🔮";
       }
       let output = "<table>";
       let socials = userData.socials;
       for (let social in socials) {
-        output += `<tr><td class="name">${social}</td><td class="link">${socials[social]}</td></tr>`;
+        output += `<tr><td class="name">${social}</td><td class="link"><a href="${socials[social]}" target="_blank">${socials[social]}</a></td></tr>`;
       }  
       output += "</table>";
       return output;
     },
-    "description": "Connect with me. 🌐 Let's network! 🤝",
+    "description": "Redes sociais. 🌐 Vamos conectar-nos! 🤝",
   },
   projects : {
     execute: () => {
        if (!isUserDataAvailable("projects")) {
-        return "🛠️ Under Construction! 🏗️\nOops! It seems my projects took a coffee break ☕ and never came back! 🚶💨\nMaybe they're off building the next big thing. Try again later!";
+        return "🛠️ Em Construção! 🏗️\nProjetos não encontrados! 🚶💨";
       }
-      let output = "Here are some of my projects:\n<table>";
+      let output = "Aqui estão alguns dos meus projetos:\n<table>";
       userData.projects.forEach(project => {
-        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link">${project.link}</td></tr>`;
+        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link"><a href="${project.link}" target="_blank">Ver</a></td></tr>`;
       });
       output += "</table>";
       return output;
     },
-    "description": "Check out projects. 💻 Prepare to be amazed! ✨"
+    "description": "Ver projetos. 💻 Prepare-se para se surpreender! ✨"
   }
 };
 

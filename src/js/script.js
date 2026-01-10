@@ -6,9 +6,84 @@ const terminal = document.getElementById("terminal");
 let specialCommands = {};
 let aboutCommands = {};
 let socials = {};
-let header = "Welcome to Portfolio shell,\nType help to see all the commands";
-let title = "Kom | PorfolioShell";
-let userData = {}
+let header = "Bem-vindo ao terminal de Christian Rodrigues,\nDigite 'help' para ver os comandos disponíveis.";
+let title = "Christian Rodrigues | PorfolioShell";
+
+// Embed user data directly to avoid CORS issues with local file fetch
+const userData = {
+    "name": "Christian Rodrigues",
+    "email": "christian.rodrigues0211@gmail.com",
+    "bio": "Sou o Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
+    "resume": "https://www.linkedin.com/in/crogued/",
+    "socials": {
+      "github": "https://github.com/Crogued",
+      "linkedin": "https://www.linkedin.com/in/crogued/"
+    },
+    "projects": [
+      {
+        "name": "Naval-Rex 2025",
+        "description": "1.º Lugar no desafio da Escola Naval. Construção de barco com materiais recicláveis, focado em Team Building e resolução de problemas. <br><a href='https://sapo.pt/artigo/escola-nautica-reforca-presenca-portuguesa-no-maior-exercicio-mundial-de-robotica-maritima-68c435dc0e9d7127e2de960f' target='_blank'>Ler Artigo no SAPO</a>",
+        "link": "https://drive.google.com/file/d/1i5SGNqI2sLuKa1E5feS8c1766l_jvPBO/view?usp=drive_link"
+      },
+      {
+        "name": "VisionNavigation",
+        "description": "Sistema autónomo de USV para navegação por bóias usando Visão por Computador (Raspberry Pi + Arduino).",
+        "link": "https://github.com/Crogued/BuoyVisionNavigation"
+      },
+      {
+        "name": "ProjetUSVautodrone",
+        "description": "Participação na competição Autodrone 2026. Veículo de superfície não tripulado.",
+        "link": "https://github.com/Bolofofopt/ProjetUSVautodrone"
+      },
+      {
+        "name": "VectorNavigation",
+        "description": "Sistema de controlo autónomo de USV usando Navegação Vetorial e coordenadas GPS. Powered by Arduino Mega.",
+        "link": "https://github.com/Crogued/VectorNavigation"
+      },
+      {
+        "name": "HumanoidRoboticArm",
+        "description": "Braço robótico de 2DoF com mão humanóide de 5 DoF que imita comportamento humano por visão.",
+        "link": "https://github.com/Bolofofopt/HumanoidRoboticArmVision"
+      },
+      {
+        "name": "Bluetooth-RC-Car",
+        "description": "Carro RC controlado por Bluetooth com stream de vídeo ESP32-CAM, desvio de obstáculos e movimento omnidirecional.",
+        "link": "https://github.com/Crogued/Bluetooth-RC-Car"
+      }
+    ],
+    "details": {
+      "history": "Nasci na Venezuela, onde vivi até aos 13 anos. Depois emigrei com a minha família para o Chile, adaptando-me a uma nova cultura durante a adolescência. A maior prova chegou aos meus 17 anos: emigrámos para Portugal e aterrei em Lisboa em março de 2020, apenas uns dias antes de o aeroporto fechar e começar o confinamento mundial. Longe de me isolar, aproveitei esse tempo para mergulhar no código e aprender a língua, conseguindo uma adaptação total. Hoje sou trilingue (Espanhol, Português, Inglês) e considero Oeiras a minha casa.",
+      "resilience": "Sempre fui desportista. Comecei no Karaté aos 6 anos e futebol federado dos 9 aos 17. Ao chegar a Portugal, o meu talento abriu portas: fui selecionado para provas nos clubes CRC Carcavelos e Porto Salvo. No entanto, a realidade económica impôs-se. Os meus pais não podiam custear os meus estudos universitários, por isso tive de tomar uma decisão difícil: renunciar ao futebol de competição para trabalhar e pagar as propinas. Trabalhei na Caseking Iberia (montagem de PCs) e na restauração (Hamburgueria do Bairro) enquanto estudava. Essa disciplina desportiva aplico-a agora na minha engenharia.",
+      "merit": "",
+      "goals": "O meu objetivo é integrar-me no ecossistema científico como especialista em Biomedicina. Se obtiver a Bolsa de Mérito, investirei os fundos em duas áreas estratégicas:\n\n1. Hardware: Aquisição de GPUs e sensores para treinar modelos de IA e visão por computador em casa.\n2. Formação: Pagar certificações avançadas em Data Science e Machine Learning para complementar a minha licenciatura."
+    },
+    "volunteering": [
+      {
+        "role": "Monitor",
+        "program": "Jovens em Movimento 2025",
+        "organization": "Câmara Municipal de Oeiras",
+        "text": "Acredito em devolver valor à comunidade. Supervisionei grupos de jovens e geri dinâmicas de grupo, o que me ajudou a desenvolver inteligência emocional e liderança. Sou considerado um membro ativo e relevante na minha comunidade académica.",
+        "link": "https://drive.google.com/file/d/1hjWy75A1Qptb1Z6U-g5BHEc2a6YzgN-E/view?usp=drive_link"
+      }
+    ],
+    "recommendations": [
+      {
+        "name": "Pedro Teodoro",
+        "role": "Presidente do Departamento de Engenharia Marítima da ENIDH",
+        "text": "O Christian distingue-se pela sua proatividade, tendo desenvolvido, com elevado grau de autonomia, projetos de relevo em sistemas embebidos, robótica e visão artificial. [...] Trata-se de um aluno responsável e colaborativo.",
+        "email": "pedroteodoro@enautica.pt",
+        "link": "https://drive.google.com/file/d/1TTfw5ujc2-LVvufirLCBgYL_PIMMmrfS/view?usp=drive_link"
+      },
+      {
+        "name": "Nome do Professor 2",
+        "role": "Cargo",
+        "text": "Texto da recomendação...",
+        "email": "email@exemplo.com",
+        "link": "#"
+      }
+    ]
+};
+
 let matrixCanvas = null;
 let matrixAnimationFrame = null;
 let matrixColumns = [];
@@ -22,85 +97,99 @@ const generalCommands = {
       clearTerminal();
       return null;
     },
-    description: "Clear terminal. 🧹 Keep it tidy! 😊"
+    description: "Limpar o terminal. Manter a organizacao."
   },
   echo: {
     execute: (args) => {
       return args.join(" ");
     },
-    description: "Echo back your text. 🔊 Like shouting in a canyon! 🏔️"
+    description: "Ecoar o seu texto."
   },
   date: {
     execute: () => {
       return new Date().toString();
     },
-    description: "Display current date and time. ⏰ Time flies! ⏱️"
+    description: "Mostrar data e hora atual."
   },
   ls: {
     execute: () => {
-      return "commands.json\nindex.html\nREADME.md\nscript.js\nstyles.css\nterminal.png";
+      return "bio.txt\nhistoria.txt\nresiliencia.txt\nmerito.txt\nmetas.txt\nprojetos.txt\ncommands.json\nindex.html\nREADME.md\nscript.js\nstyles.css";
     },
-    description: "List files in the directory. 📁 What's in here? 🔍"
+    description: "Listar ficheiros no diretorio atual."
   },
   pwd: {
     execute: () => {
-      return "/home/visitor/kom";
+      return "/home/oeiras-valley/bolsa-merito";
     },
-    description: "Print working directory. 📍 Where am I? 🗺️"
+    description: "Mostrar diretorio de trabalho atual."
   },
   cat: {
     execute: (args) => {
       if (args.length === 0) {
-        return "Usage: cat [filename]";
+        return "Uso: cat [nome_do_ficheiro]";
       }
       
-      const filename = args[0];
+      const filename = args[0].toLowerCase();
+      // Ensure userData is loaded
       const files = {
-        "readme.md": "# KomPortfolioShell\n\nA terminal-like portfolio page for Kom Senapati.",
-        "commands.json": "This file contains all the special commands for this terminal."
+        "readme.md": "# Portfolio Terminal\n\nUma pagina de portfolio estilo terminal para Christian Rodrigues.",
+        "bio.txt": userData?.bio || "Dados nao disponiveis.",
+        "historia.txt": userData?.details?.history || "Historia nao disponivel.",
+        "resiliencia.txt": userData?.details?.resilience || "Info de resiliencia nao disponivel.",
+        "merito.txt": userData?.details?.merit || "Info de merito nao disponivel.",
+        "metas.txt": userData?.details?.goals || "Metas nao disponiveis.",
+        "projetos.txt": "Use o comando 'projetos' para uma melhor visualizacao.",
+        "commands.json": "Este ficheiro contem os comandos especiais para este terminal.",
+        "certificacoes.txt": "Cisco Python Essentials, Google Generative AI."
       };
       
-      if (files[filename.toLowerCase()]) {
-        return files[filename.toLowerCase()];
+      if (files[filename]) {
+        return files[filename];
       } else {
-        return `cat: ${filename}: No such file or directory`;
+        return `cat: ${filename}: Ficheiro ou diretorio inexistente`;
       }
     },
-    description: "Display file contents. 📄 What's inside? 👀"
+    description: "Ler ficheiros (Ex: 'cat bio.txt')."
   },
   man: {
     execute: (args) => {
       if (args.length === 0) {
-        return "What manual page do you want? Try 'man [command]'";
+        return "Que manual quer ver? Tente 'man [comando]'";
       }
       
       const command = args[0];
       
       if (generalCommands[command]) {
-        return `NAME\n    ${command} - ${generalCommands[command].description}\n\nDESCRIPTION\n    ${getManualDescription(command)}`;
+        return `NOME\n    ${command} - ${generalCommands[command].description}\n\nDESCRICAO\n    ${getManualDescription(command)}`;
       } else if (specialCommands[command]) {
-        return `NAME\n    ${command} - ${specialCommands[command].description}\n\nDESCRIPTION\n    A special command that provides information about Kom's portfolio.`;
+        return `NOME\n    ${command} - ${specialCommands[command].description}\n\nDESCRICAO\n    Comando especial do portfolio.`;
       } else {
-        return `No manual entry for ${command}`;
+        return `Sem entrada manual para ${command}`;
       }
     },
-    description: "Display manual for a command. 📚 Need help? 🆘"
+    description: "Manual do comando."
   },
   uname: {
     execute: () => {
-      return "KomShell";
+      return "Linux (Oeiras Valley Edition)";
     },
-    description: "Print system information. 💻 What am I running on? 🖥️"
+    description: "Informacao do sistema."
   },
   history: {
     execute: () => {
-      return commandHistory.join("\n") || "No commands in history yet";
+      return commandHistory.join("\n") || "Ainda sem historico";
     },
-    description: "Show command history. 📜 What did I type before? 🔍"
+    description: "Historico de comandos recentes."
   },
   help: {
     execute: () => {
-      let output = "<table>";
+      // 1. Dica Pro
+      let output = "<div><strong>💡 Dica Pro:</strong></div>";
+      output += "<div>Para ler ficheiros individuais, use o comando <code>cat</code>.</div>";
+      output += "<div>Exemplo: <span class='command'>cat bio.txt</span> ou <span class='command'>cat metas.txt</span></div><br>";
+      
+      // 2. Todos os Comandos
+      output += "<div><strong>Todos os Comandos:</strong></div><table>";
       // Add general commands
       for (let cmd in generalCommands) {
         output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
@@ -109,93 +198,125 @@ const generalCommands = {
       for (let cmd in specialCommands) {
         output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${specialCommands[cmd].description}</td></tr>`;
       }
+      output += "</table><br>";
+
+      // 3. Comandos Sugeridos
+      output += "<div><strong>Comandos Sugeridos:</strong></div>";
+      output += "<table>";
+      output += `<tr><td class="available-command">sobre</td><td class="command-description">Quem sou, a minha história e resiliência.</td></tr>`;
+      output += `<tr><td class="available-command">projetos</td><td class="command-description">Os meus projetos técnicos e competições.</td></tr>`;
+      output += `<tr><td class="available-command">metas</td><td class="command-description">Objetivos para a Bolsa de Mérito e futuro.</td></tr>`;
+      output += `<tr><td class="available-command">merito</td><td class="command-description">Envolvimento comunitário e cartas de recomendação.</td></tr>`;
       output += "</table>";
+      
       return output;
     },
-    description: "You know what this does. 🙄 Want some hints? 😏"
+    description: "Lista de comandos disponíveis."
   },
   banner: {
     execute: () => {
       return header;
     },
-    description: "Display the welcome banner. 👋 Hello again! 🎉"
+    description: "Mostrar o banner de boas-vindas."
   },
-  whois : {
+  sobre: {
+    execute: () => {
+       if (!isUserDataAvailable()) return "Dados nao disponiveis.";
+       return `
+<strong>QUEM SOU:</strong><br>
+${userData.bio}<br><br>
+
+<strong>A MINHA HISTORIA:</strong><br>
+${userData.details?.history}<br><br>
+
+<strong>SACRIFICIO E RESILIENCIA:</strong><br>
+${userData.details?.resilience}
+       `.trim();
+    },
+    description: "A minha historia completa (Bio, Historia, Resiliencia)."
+  },
+  merito: {
+    execute: () => {
+       if (!isUserDataAvailable("details")) return "Dados nao disponiveis.";
+       
+       let output = "";
+       
+       // Volunteering Section
+       if (userData.volunteering && userData.volunteering.length > 0) {
+           output += "<strong>MERITO SOCIAL (Voluntariado):</strong><br>";
+           userData.volunteering.forEach(vol => {
+               output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
+<strong>${vol.role}</strong> | ${vol.program}<br>
+<em>${vol.organization}</em><br>
+<p>${vol.text}</p>
+<a href="${vol.link}" target="_blank">Ver Documento de Verificação</a>
+</div>`;
+           });
+       }
+
+       // Recommendations Section
+       if (userData.recommendations && userData.recommendations.length > 0) {
+           output += "<strong>CARTAS DE RECOMENDACAO:</strong><br>";
+           userData.recommendations.forEach(rec => {
+               output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
+<strong>${rec.name}</strong> | ${rec.role}<br>
+<em>"${rec.text}"</em><br>
+Email: <a href="mailto:${rec.email}">${rec.email}</a> | <a href="${rec.link}" target="_blank">Ver Carta Oficial</a>
+</div>`;
+           });
+       }
+       
+       return output;
+    },
+    description: "Atividades de merito social e cartas de recomendacao."
+  },
+  metas: {
+    execute: () => {
+       if (!isUserDataAvailable("details")) return "Dados nao disponiveis.";
+       return `<strong>AS MINHAS METAS:</strong><br>${userData.details.goals.replace(/\n/g, '<br>')}`;
+    },
+    description: "Objetivos para a Bolsa de Merito e futuro."
+  },
+  quem : {
     execute: () => {
       if (!isUserDataAvailable()) {
-        return "🚨 ALERT! 🚨\nIt seems like I have amnesia... My user data has mysteriously vanished into the void! 🌌👀\nTry reloading or summoning the data wizard. 🧙‍♂️✨";
+        return "ALERTA: Dados do utilizador nao encontrados.";
       }
-      return `    Name: ${userData.name}\n    Email: ${userData.email}\n    Bio: ${userData.bio}`;
+      return `    Nome: ${userData.name}\n    Email: ${userData.email}\n    Bio: ${userData.bio}`;
     },
-    description: "Display user information. 🙋 Who am I? 🤔"
+    description: "Informacao basica do utilizador."
   },
-  social : {
+  redes : {
     execute: () => {
       if (!isUserDataAvailable("socials")) {
-        return "😱 OH NO! \nIt looks like my social links got lost in the multiverse! 🌀🔮\nMaybe they're chilling in another dimension. 🚀";
+        return "Erro: Links sociais nao encontrados.";
       }
       let output = "<table>";
       let socials = userData.socials;
       for (let social in socials) {
-        output += `<tr><td class="name">${social}</td><td class="link">${socials[social]}</td></tr>`;
+        output += `<tr><td class="name">${social}</td><td class="link"><a href="${socials[social]}" target="_blank">${socials[social]}</a></td></tr>`;
       }  
       output += "</table>";
       return output;
     },
-    "description": "Connect with me. 🌐 Let's network! 🤝",
+    "description": "Links para redes sociais e contactos.",
   },
-  projects : {
+  projetos : {
     execute: () => {
-       if (!isUserDataAvailable("projects")) {
-        return "🛠️ Under Construction! 🏗️\nOops! It seems my projects took a coffee break ☕ and never came back! 🚶💨\nMaybe they're off building the next big thing. Try again later!";
+       // Debug logic: Check if userData exists and has projects
+       if (!userData || !userData.projects) {
+        return "Erro: Dados de projetos nao carregados ou vazios.";
       }
-      let output = "Here are some of my projects:\n<table>";
+      let output = "Aqui estao alguns dos meus projetos:\n<table>";
       userData.projects.forEach(project => {
-        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link">${project.link}</td></tr>`;
+        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link"><a href="${project.link}" target="_blank">Ver</a></td></tr>`;
       });
       output += "</table>";
       return output;
     },
-    "description": "Check out projects. 💻 Prepare to be amazed! ✨"
+    "description": "Lista de projetos tecnicos e competicoes."
   }
 };
-
-// Helper function for man command
-function getManualDescription(command) {
-  const manuals = {
-    clear: "Clear the terminal screen.",
-    echo: "Display a line of text. Usage: echo [text]",
-    date: "Display the current date and time.",
-    ls: "List directory contents.",
-    pwd: "Print the name of the current working directory.",
-    cat: "Concatenate and display file contents. Usage: cat [filename]",
-    man: "Display manual page for a command. Usage: man [command]",
-    uname: "Print system information.",
-    history: "Display the command history list.",
-    help: "Display help information about available commands.",
-    banner: "Display the welcome banner."
-  };
-  
-  return manuals[command] || "No detailed description available.";
-}
-
-// Load user.json file
-async function loadUserData() {
-  try {
-    const response = await fetch('src/config/user.json');
-    if (!response.ok) {
-      throw new Error('Failed to load user data');
-    }
-    
-    userData = await response.json();
-    console.log("User data loaded successfully.");
-  } catch (error) {
-    console.error("Error loading user data:", error);
-    userData = null;
-  }
-}
-
-loadUserData();
 
 // Check if user data is available
 const isUserDataAvailable = (key) => {
@@ -385,7 +506,7 @@ commandLine.addEventListener("keydown", function (event) {
 
 function displayCommand(command) {
   const commandElement = document.createElement("p");
-  commandElement.innerHTML = `<span id="prompt">visitor@shell:~/kom $</span> <span class="command">${command}</span>`;
+  commandElement.innerHTML = `<span id="prompt">oeiras-valley@shell:~/bolsa-merito $</span> <span class="command">${command}</span>`;
   terminalOutput.appendChild(commandElement);
 }
 
