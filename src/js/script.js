@@ -16,8 +16,18 @@ const userData = {
     "bio": "Sou o Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
     "resume": "https://www.linkedin.com/in/crogued/",
     "socials": {
-      "github": "https://github.com/Crogued",
-      "linkedin": "https://www.linkedin.com/in/crogued/"
+      "GitHub": {
+        "url": "https://github.com/Crogued",
+        "text": "Crogued"
+      },
+      "LinkedIn": {
+        "url": "https://www.linkedin.com/in/crogued/",
+        "text": "Christian Rodrigues"
+      },
+      "CV": { 
+        "url": "https://drive.google.com/file/d/1DW-puFjLr49Y0WNBVvx0s56sXMV2tTZt/view?usp=drive_link",
+        "text": "Christian Rodrigues"
+      }
     },
     "projects": [
       {
@@ -126,7 +136,7 @@ const generalCommands = {
   cat: {
     execute: (args) => {
       if (args.length === 0) {
-        return "Uso: cat [nome_do_ficheiro]";
+        return "Uso: cat [nome_do_ficheiro].\nDigite 'ls' para ver os ficheiros disponíveis.";
       }
       
       const filename = args[0].toLowerCase();
@@ -146,7 +156,7 @@ const generalCommands = {
       if (files[filename]) {
         return files[filename];
       } else {
-        return `cat: ${filename}: Ficheiro ou diretorio inexistente`;
+        return `cat: ${filename}: Ficheiro ou diretorio inexistente.\nDigite 'ls' para ver os ficheiros disponíveis.`;
       }
     },
     description: "Ler ficheiros (Ex: 'cat bio.txt')."
@@ -183,8 +193,13 @@ const generalCommands = {
   },
   help: {
     execute: () => {
+      // 0. Como Interagir (New)
+      let output = "<div><strong>COMO INTERAGIR:</strong></div>";
+      output += "<div>1. Escolha um comando da lista abaixo.</div>";
+      output += "<div>2. Escreva-o e pressione <span class='command'>ENTER</span>.</div><br>";
+
       // 1. Dica Pro
-      let output = "<div><strong>💡 Dica Pro:</strong></div>";
+      output += "<div><strong>💡 Dica Pro:</strong></div>";
       output += "<div>Para ler ficheiros individuais, use o comando <code>cat</code>.</div>";
       output += "<div>Exemplo: <span class='command'>cat bio.txt</span> ou <span class='command'>cat metas.txt</span></div><br>";
       
@@ -293,8 +308,9 @@ Email: <a href="mailto:${rec.email}">${rec.email}</a> | <a href="${rec.link}" ta
       }
       let output = "<table>";
       let socials = userData.socials;
-      for (let social in socials) {
-        output += `<tr><td class="name">${social}</td><td class="link"><a href="${socials[social]}" target="_blank">${socials[social]}</a></td></tr>`;
+      for (let platform in socials) {
+        const item = socials[platform];
+        output += `<tr><td class="name">${platform}</td><td class="link"><a href="${item.url}" target="_blank">${item.text}</a></td></tr>`;
       }  
       output += "</table>";
       return output;
@@ -457,6 +473,32 @@ const themes = {
 
 window.addEventListener("load", (event) => {
   setTheme(localStorage.getItem("terminal_theme") ?? "default");
+  
+  // Tutorial Modal Logic
+  const modal = document.getElementById("tutorial-modal");
+  const btn = document.getElementById("tutorial-btn");
+  const span = document.getElementsByClassName("close-modal")[0];
+
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function() {
+    modal.style.display = "none";
+    // Stop video when closing
+    const iframe = modal.querySelector('iframe');
+    const tempSrc = iframe.src;
+    iframe.src = tempSrc; 
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      const iframe = modal.querySelector('iframe');
+      const tempSrc = iframe.src;
+      iframe.src = tempSrc;
+    }
+  }
 });
 
 // Header is now displayed after loading commands.json
@@ -754,6 +796,26 @@ function setTheme(theme) {
   } else {
     return `Theme ${theme} not found.`;
   }
+}
+
+function getManualDescription(command) {
+  const manuals = {
+    "sobre": "Exibe a biografia completa, historia de vida e resiliencia de Christian Rodrigues.",
+    "merito": "Mostra os detalhes de envolvimento comunitario, voluntariado e cartas de recomendacao.",
+    "metas": "Lista os objetivos academicos e profissionais, incluindo o uso planeado da Bolsa de Merito.",
+    "projetos": "Apresenta uma lista detalhada dos projetos tecnicos, com links para GitHub e documentacao.",
+    "ls": "Lista todos os ficheiros virtuais disponiveis no diretorio atual. Use 'cat' para ler o conteudo.",
+    "cat": "Le o conteudo de um ficheiro especifico. Exemplo: 'cat bio.txt' ira mostrar a biografia.",
+    "help": "Mostra a lista de comandos e instrucoes de interacao.",
+    "clear": "Limpa todo o texto visivel no terminal.",
+    "date": "Mostra a data e hora atuais do sistema.",
+    "pwd": "Mostra o caminho absoluto do diretorio atual.",
+    "man": "Mostra o manual de utilizacao de um comando. Ex: 'man ls'.",
+    "uname": "Mostra informacoes sobre o sistema operativo simulado.",
+    "history": "Mostra a lista dos ultimos comandos executados.",
+    "banner": "Repete a mensagem de boas-vindas do terminal."
+  };
+  return manuals[command] || "Sem descricao detalhada disponivel.";
 }
 
 function createMatrixEffect() {

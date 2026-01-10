@@ -18,7 +18,8 @@
                     <div class="control close"></div>
                     <div class="control minimize"></div>
                     <div class="control maximize"></div>
-                </div> 
+                </div>
+                <button id="tutorial-btn" class="tutorial-btn">Tutorial 📺</button>
                 <div class="terminal-title">oeiras-valley@shell: ~/bolsa-merito</div>
             </div>
             <div id="terminal-output"></div>
@@ -26,6 +27,16 @@
             <div id="input-line">
                 <span id="prompt">oeiras-valley@shell:~/bolsa-merito $</span>
                 <input type="text" id="command-line" autocomplete="off" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/37AQBtiQ7QE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
