@@ -1,12 +1,14 @@
 const terminalOutput = document.getElementById("terminal-output");
 const commandLine = document.getElementById("command-line");
 const terminal = document.getElementById("terminal");
+// New scrollable container reference
+let terminalBody; 
 
 // Configuration variables
 let specialCommands = {};
 let aboutCommands = {};
 let socials = {};
-let header = "Bem-vindo ao terminal de Christian Rodrigues,\nDigite 'help' para ver os comandos disponíveis.";
+let header = "Bem-vindo ao terminal de Christian Rodrigues,\nDigite 'help' para ver os comandos disponíveis ou clique em 'Tutorial' para ver um breve tutorial.\n\nUse o scroll do rato para ver mais contéudo para baixo";
 let title = "Christian Rodrigues | PorfolioShell";
 
 // Embed user data directly to avoid CORS issues with local file fetch
@@ -221,7 +223,7 @@ const generalCommands = {
       output += `<tr><td class="available-command">sobre</td><td class="command-description">Quem sou, a minha história e resiliência.</td></tr>`;
       output += `<tr><td class="available-command">projetos</td><td class="command-description">Os meus projetos técnicos e competições.</td></tr>`;
       output += `<tr><td class="available-command">metas</td><td class="command-description">Objetivos para a Bolsa de Mérito e futuro.</td></tr>`;
-      output += `<tr><td class="available-command">merito</td><td class="command-description">Envolvimento comunitário e cartas de recomendação.</td></tr>`;
+      output += `<tr><td class="available-command">meritos</td><td class="command-description">Envolvimento comunitário e cartas de recomendação.</td></tr>`;
       output += "</table>";
       
       return output;
@@ -250,7 +252,7 @@ ${userData.details?.resilience}
     },
     description: "A minha historia completa (Bio, Historia, Resiliencia)."
   },
-  merito: {
+  meritos: {
     execute: () => {
        if (!isUserDataAvailable("details")) return "Dados nao disponiveis.";
        
@@ -474,6 +476,9 @@ const themes = {
 window.addEventListener("load", (event) => {
   setTheme(localStorage.getItem("terminal_theme") ?? "default");
   
+  // Initialize terminal body reference
+  terminalBody = document.getElementById("terminal-body");
+
   // Tutorial Modal Logic
   const modal = document.getElementById("tutorial-modal");
   const btn = document.getElementById("tutorial-btn");
@@ -801,7 +806,7 @@ function setTheme(theme) {
 function getManualDescription(command) {
   const manuals = {
     "sobre": "Exibe a biografia completa, historia de vida e resiliencia de Christian Rodrigues.",
-    "merito": "Mostra os detalhes de envolvimento comunitario, voluntariado e cartas de recomendacao.",
+    "meritos": "Mostra os detalhes de envolvimento comunitario, voluntariado e cartas de recomendacao.",
     "metas": "Lista os objetivos academicos e profissionais, incluindo o uso planeado da Bolsa de Merito.",
     "projetos": "Apresenta uma lista detalhada dos projetos tecnicos, com links para GitHub e documentacao.",
     "ls": "Lista todos os ficheiros virtuais disponiveis no diretorio atual. Use 'cat' para ler o conteudo.",
