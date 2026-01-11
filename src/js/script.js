@@ -8,14 +8,14 @@ let terminalBody;
 let specialCommands = {};
 let aboutCommands = {};
 let socials = {};
-let header = "Bem-vindo ao terminal de Christian Rodrigues,\nDigite 'help' para ver os comandos disponíveis ou clique em 'Tutorial' para ver um breve tutorial.\n\nUse o scroll do rato para ver mais contéudo para baixo";
+let header = "Bem-vindo ao terminal de Christian Rodrigues,\nDigite 'help' para ver os comandos disponíveis ou clique em 'Tutorial' para ver um breve tutorial.\n\nUse o scroll do rato para ver mais contéudo.";
 let title = "Christian Rodrigues | PorfolioShell";
 
 // Embed user data directly to avoid CORS issues with local file fetch
 const userData = {
     "name": "Christian Rodrigues",
     "email": "christian.rodrigues0211@gmail.com",
-    "bio": "Sou o Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
+    "bio": " Sou Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
     "resume": "https://www.linkedin.com/in/crogued/",
     "socials": {
       "GitHub": {
@@ -111,30 +111,14 @@ const generalCommands = {
     },
     description: "Limpar o terminal. Manter a organizacao."
   },
-  echo: {
-    execute: (args) => {
-      return args.join(" ");
-    },
-    description: "Ecoar o seu texto."
-  },
-  date: {
-    execute: () => {
-      return new Date().toString();
-    },
-    description: "Mostrar data e hora atual."
-  },
+
   ls: {
     execute: () => {
       return "bio.txt\nhistoria.txt\nresiliencia.txt\nmerito.txt\nmetas.txt\nprojetos.txt\ncommands.json\nindex.html\nREADME.md\nscript.js\nstyles.css";
     },
     description: "Listar ficheiros no diretorio atual."
   },
-  pwd: {
-    execute: () => {
-      return "/home/oeiras-valley/bolsa-merito";
-    },
-    description: "Mostrar diretorio de trabalho atual."
-  },
+
   cat: {
     execute: (args) => {
       if (args.length === 0) {
@@ -166,7 +150,7 @@ const generalCommands = {
   man: {
     execute: (args) => {
       if (args.length === 0) {
-        return "Que manual quer ver? Tente 'man [comando]'";
+        return "Manual de uso. Ex: 'man ls'";
       }
       
       const command = args[0];
@@ -179,14 +163,9 @@ const generalCommands = {
         return `Sem entrada manual para ${command}`;
       }
     },
-    description: "Manual do comando."
+    description: "Manual dos comandos (Ex: 'man ls')."
   },
-  uname: {
-    execute: () => {
-      return "Linux (Oeiras Valley Edition)";
-    },
-    description: "Informacao do sistema."
-  },
+
   history: {
     execute: () => {
       return commandHistory.join("\n") || "Ainda sem historico";
@@ -202,14 +181,16 @@ const generalCommands = {
 
       // 1. Dica Pro
       output += "<div><strong>💡 Dica Pro:</strong></div>";
-      output += "<div>Para ler ficheiros individuais, use o comando <code>cat</code>.</div>";
-      output += "<div>Exemplo: <span class='command'>cat bio.txt</span> ou <span class='command'>cat metas.txt</span></div><br>";
+      output += "<div>Para ver ficheiros use <span class='command'>ls</span>.</div>";
+      output += "<div>Para le-los use <span class='command'>'cat [nome]'</span>. Exemplo: <span class='command'>cat bio.txt</span></div><br>";
       
       // 2. Todos os Comandos
       output += "<div><strong>Todos os Comandos:</strong></div><table>";
       // Add general commands
       for (let cmd in generalCommands) {
-        output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
+        if (!generalCommands[cmd].hidden) {
+             output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
+        }
       }
       // Add special commands
       for (let cmd in specialCommands) {
@@ -230,11 +211,35 @@ const generalCommands = {
     },
     description: "Lista de comandos disponíveis."
   },
-  banner: {
+  jogos: {
     execute: () => {
-      return header;
+      return `<strong>JOGOS DISPONÍVEIS:</strong> (Digite o nome do jogo para iniciar)<br>
+<span class='command'>rps</span>   - Pedra, Papel, Tesoura<br>
+<span class='command'>ttt</span>   - Jogo do Galo (Tic Tac Toe)<br>
+<span class='command'>simon</span> - Simon Says (Memória)`;
     },
-    description: "Mostrar o banner de boas-vindas."
+    description: "Menu de jogos interativos."
+  },
+  rps: {
+    execute: () => {
+      return startRPS();
+    },
+    description: "Jogar Pedra, Papel, Tesoura.",
+    hidden: true
+  },
+  ttt: {
+    execute: () => {
+      return startTTT();
+    },
+    description: "Jogar Jogo do Galo.",
+    hidden: true
+  },
+  simon: {
+    execute: () => {
+      return startSimon();
+    },
+    description: "Jogar Simon Says.",
+    hidden: true
   },
   sobre: {
     execute: () => {
@@ -299,7 +304,13 @@ Email: <a href="mailto:${rec.email}">${rec.email}</a> | <a href="${rec.link}" ta
       if (!isUserDataAvailable()) {
         return "ALERTA: Dados do utilizador nao encontrados.";
       }
-      return `    Nome: ${userData.name}\n    Email: ${userData.email}\n    Bio: ${userData.bio}`;
+      return `<table>
+        <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Nome:</td><td class="description" style="padding-left: 0;">${userData.name}</td></tr>
+        <tr><td colspan="2"><hr style="border: 0; border-top: 1px solid var(--bright-black-color); margin: 5px 0;"></td></tr>
+        <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Email:</td><td class="description" style="padding-left: 0;">${userData.email}</td></tr>
+        <tr><td colspan="2"><hr style="border: 0; border-top: 1px solid var(--bright-black-color); margin: 5px 0;"></td></tr>
+        <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Bio:</td><td class="description" style="padding-left: 0;">${userData.bio}</td></tr>
+      </table>`;
     },
     description: "Informacao basica do utilizador."
   },
@@ -527,8 +538,10 @@ commandLine.addEventListener("keydown", function (event) {
     if (trimmedCommand) {
       commandHistory.push(trimmedCommand);
       currentHistoryIndex = commandHistory.length;
+      currentHistoryIndex = commandHistory.length;
     }
     commandLine.value = "";
+    scrollToBottom();
   } else if (event.key === "ArrowUp") {
     event.preventDefault();
     if (commandHistory.length === 0) return;
@@ -655,7 +668,11 @@ function clearTerminal() {
 }
 
 function scrollToBottom() {
-  terminal.scrollTop = terminal.scrollHeight;
+  if (terminalBody) {
+    requestAnimationFrame(() => {
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    });
+  }
 }
 
 async function fetchJoke() {
@@ -814,11 +831,8 @@ function getManualDescription(command) {
     "help": "Mostra a lista de comandos e instrucoes de interacao.",
     "clear": "Limpa todo o texto visivel no terminal.",
     "date": "Mostra a data e hora atuais do sistema.",
-    "pwd": "Mostra o caminho absoluto do diretorio atual.",
     "man": "Mostra o manual de utilizacao de um comando. Ex: 'man ls'.",
-    "uname": "Mostra informacoes sobre o sistema operativo simulado.",
-    "history": "Mostra a lista dos ultimos comandos executados.",
-    "banner": "Repete a mensagem de boas-vindas do terminal."
+    "history": "Mostra a lista dos ultimos comandos executados."
   };
   return manuals[command] || "Sem descricao detalhada disponivel.";
 }
@@ -838,6 +852,8 @@ function createMatrixEffect() {
         z-index: 1;
         border-radius: 10px;
         border: 2px solid var(--foreground-color);
+        top: 0;
+        left: 0;
     `;
 
     controls.style.cssText = `
@@ -848,6 +864,7 @@ function createMatrixEffect() {
         display: flex;
         gap: 8px;
     `;
+
     controls.innerHTML = `
       <span style="color: var(--green-color); cursor: default; user-select: none;">MATRIX</span>
       <span style="color: var(--red-color); cursor: pointer; padding: 0 5px; user-select: none;" 
@@ -954,4 +971,272 @@ function determineWinner(user, terminal) {
     return 'You win! 🎉';
   }
   return 'Terminal wins! 💻';
+}
+
+/* --- GAMES LOGIC --- */
+
+// RPS
+function startRPS() {
+    setTimeout(() => {
+        const id = "rps-" + Date.now();
+        const container = document.createElement("div");
+        container.className = "rps-container";
+        container.id = id;
+        container.innerHTML = `
+            <button class="rps-btn" onclick="playRPS('${id}', 'rock')">Pedra</button>
+            <button class="rps-btn" onclick="playRPS('${id}', 'paper')">Papel</button>
+            <button class="rps-btn" onclick="playRPS('${id}', 'scissors')">Tesoura</button>
+            <span class="rps-result" style="margin-left: 10px; align-self: center;"></span>
+        `;
+        terminalOutput.appendChild(container);
+        scrollToBottom();
+    }, 100);
+    return "Escolha a sua jogada:";
+}
+
+window.playRPS = function(id, playerMove) {
+    const container = document.getElementById(id);
+    if(!container) return;
+    const resultSpan = container.querySelector(".rps-result");
+    const moves = ['rock', 'paper', 'scissors'];
+    const aiMove = moves[Math.floor(Math.random() * 3)];
+    
+    // Disable buttons
+    const btns = container.querySelectorAll(".rps-btn");
+    btns.forEach(b => b.disabled = true);
+
+    const translations = {
+        'rock': 'Pedra',
+        'paper': 'Papel',
+        'scissors': 'Tesoura'
+    };
+
+    let result = "";
+    if (playerMove === aiMove) result = "Empate!";
+    else if (
+        (playerMove === 'rock' && aiMove === 'scissors') ||
+        (playerMove === 'paper' && aiMove === 'rock') ||
+        (playerMove === 'scissors' && aiMove === 'paper')
+    ) result = "Ganhaste!";
+    else result = "Perdeste! AI escolheu " + translations[aiMove];
+
+    resultSpan.innerHTML = `Tu: ${translations[playerMove]} | AI: ${translations[aiMove]} -> <strong>${result}</strong>`;
+}
+
+// Tic Tac Toe
+window.startTTT = function() {
+     setTimeout(() => {
+        const id = "ttt-" + Date.now();
+        const container = document.createElement("div");
+        container.className = "ttt-board";
+        container.id = id;
+        for(let i=0; i<9; i++) {
+            const cell = document.createElement("div");
+            cell.className = "ttt-cell";
+            cell.dataset.index = i;
+            cell.onclick = () => playTTT(id, i);
+            container.appendChild(cell);
+        }
+        terminalOutput.appendChild(container);
+        scrollToBottom();
+        
+        // Init state
+        container.dataset.board = JSON.stringify(Array(9).fill(null));
+        container.dataset.turn = 'X';
+        container.dataset.active = 'true';
+    }, 100);
+    return "Jogo do Galo iniciado! Tu és o X.";
+}
+
+window.playTTT = function(id, index) {
+    const container = document.getElementById(id);
+    if(container.dataset.active === 'false') return;
+    
+    let board = JSON.parse(container.dataset.board);
+    if(board[index]) return; // Occupied
+
+    // Player Move
+    board[index] = 'X';
+    updateTTTBoard(container, board);
+    
+    if(checkTTTWin(board, 'X')) { endGameTTT(container, "Ganhaste!"); return; }
+    if(!board.includes(null)) { endGameTTT(container, "Empate!"); return; }
+
+    // AI Move (Minimax)
+    setTimeout(() => {
+        if(container.dataset.active === 'false') return;
+        
+        let bestScore = -Infinity;
+        let move;
+        
+        
+        // Difficulty: 30% chance to error (Random move), 70% Perfect (Minimax)
+        if (Math.random() < 0.3) {
+             let emptyIndices = board.map((v, i) => v === null ? i : null).filter(v => v !== null);
+             move = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+        } else {
+             // Find best move
+            for(let i=0; i<9; i++) {
+                if(board[i] === null) {
+                    board[i] = 'O';
+                    let score = minimax(board, 0, false);
+                    board[i] = null;
+                    if(score > bestScore) {
+                        bestScore = score;
+                        move = i;
+                    }
+                }
+            }
+        }
+        
+        board[move] = 'O';
+        updateTTTBoard(container, board);
+        container.dataset.board = JSON.stringify(board);
+
+        if(checkTTTWin(board, 'O')) { endGameTTT(container, "Perdeste!"); return; }
+        if(!board.includes(null)) { endGameTTT(container, "Empate!"); return; }
+    }, 500);
+    
+    container.dataset.board = JSON.stringify(board);
+}
+
+function minimax(board, depth, isMaximizing) {
+    if (checkTTTWin(board, 'O')) return 10 - depth;
+    if (checkTTTWin(board, 'X')) return depth - 10;
+    if (!board.includes(null)) return 0;
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === null) {
+                board[i] = 'O';
+                let score = minimax(board, depth + 1, false);
+                board[i] = null;
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === null) {
+                board[i] = 'X';
+                let score = minimax(board, depth + 1, true);
+                board[i] = null;
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+function updateTTTBoard(container, board) {
+    const cells = container.querySelectorAll(".ttt-cell");
+    board.forEach((val, i) => {
+        cells[i].innerText = val || "";
+        cells[i].style.color = val === 'X' ? 'var(--cyan-color)' : 'var(--red-color)';
+    });
+}
+
+function checkTTTWin(board, player) {
+    const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    return wins.some(combo => combo.every(i => board[i] === player));
+}
+
+function endGameTTT(container, msg) {
+    container.dataset.active = 'false';
+    const msgDiv = document.createElement("div");
+    msgDiv.innerHTML = `<strong>${msg}</strong>`;
+    msgDiv.style.marginTop = "10px";
+    msgDiv.style.paddingLeft = "1rem";
+    container.parentNode.insertBefore(msgDiv, container.nextSibling);
+    scrollToBottom();
+}
+
+// Simon Says
+let simonSequence = [];
+let playerSequence = [];
+let simonLevel = 0;
+let isSimonPlaying = false;
+
+window.startSimon = function() {
+    simonLevel = 0;
+    simonSequence = [];
+    isSimonPlaying = true;
+    
+    setTimeout(() => {
+        const id = "simon-" + Date.now();
+        const container = document.createElement("div");
+        container.className = "simon-board";
+        container.id = id;
+        
+        ['green', 'red', 'yellow', 'blue'].forEach(color => {
+            const btn = document.createElement("div");
+            btn.className = `simon-btn simon-${color}`;
+            btn.dataset.color = color;
+            btn.onclick = () => handleSimonInput(id, color);
+            container.appendChild(btn);
+        });
+        
+        terminalOutput.appendChild(container);
+        scrollToBottom();
+        
+        nextSimonRound(id);
+    }, 100);
+    return "Simon Says iniciado! Presta atenção à sequência.";
+}
+
+function nextSimonRound(id) {
+    simonLevel++;
+    playerSequence = [];
+    const colors = ['green', 'red', 'yellow', 'blue'];
+    simonSequence.push(colors[Math.floor(Math.random() * 4)]);
+    
+    const container = document.getElementById(id);
+    if(!container) return;
+
+    // Show sequence
+    let i = 0;
+    const interval = setInterval(() => {
+        flashSimonBtn(container, simonSequence[i]);
+        i++;
+        if(i >= simonSequence.length) {
+            clearInterval(interval);
+        }
+    }, 800);
+}
+
+function flashSimonBtn(container, color) {
+    const btn = container.querySelector(`.simon-${color}`);
+    btn.classList.add("active");
+    setTimeout(() => btn.classList.remove("active"), 400);
+}
+
+window.handleSimonInput = function(id, color) {
+    const container = document.getElementById(id);
+    // Visual feedback
+    flashSimonBtn(container, color);
+    
+    playerSequence.push(color);
+    
+    // Check input
+    const idx = playerSequence.length - 1;
+    if(playerSequence[idx] !== simonSequence[idx]) {
+        endSimonGame(container, `Game Over! Chegaste ao nível ${simonLevel}.`);
+        return;
+    }
+    
+    if(playerSequence.length === simonSequence.length) {
+        setTimeout(() => nextSimonRound(id), 1000);
+    }
+}
+
+function endSimonGame(container, msg) {
+    const msgDiv = document.createElement("div");
+    msgDiv.innerHTML = `<strong>${msg}</strong>`;
+    msgDiv.style.marginTop = "10px";
+    msgDiv.style.paddingLeft = "1rem";
+    container.parentNode.insertBefore(msgDiv, container.nextSibling);
+    container.style.pointerEvents = 'none'; // Disable input
+    scrollToBottom();
 }
