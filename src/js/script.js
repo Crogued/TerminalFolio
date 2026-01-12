@@ -69,6 +69,14 @@ const userData = {
       "merit": "",
       "goals": "O FUNDAMENTAL: A Bolsa de Mérito servirá para pagar as propinas da minha Licenciatura em Biomedicina Computacional e Inteligência Artificial na Universidade Lusófona. Este é o meu grande objetivo.\n\nInvestimentos Secundários (com o remanescente):\n1. Hardware: GPUs e sensores para os meus projetos de robótica em casa.\n2. Certificações: Formação extra em Data Science."
     },
+    "academic": [
+      {
+        "title": "Diploma de Mérito - Prémios Caixa + Mundo",
+        "organization": "Caixa Geral de Depósitos",
+        "text": "Prémio atribuído por ter ingressado com a melhor nota do meu curso (17 valores).",
+        "link": "https://drive.google.com/file/d/1KwD29FPPptovRjT7-rhKLZxhiP7WoL2K/view?usp=drive_link"
+      }
+    ],
     "volunteering": [
       {
         "role": "Monitor",
@@ -263,6 +271,19 @@ ${userData.details?.resilience}
        
        let output = "";
        
+       // Academic Section
+       if (userData.academic && userData.academic.length > 0) {
+           output += "<strong>MÉRITO ACADÉMICO:</strong><br>";
+           userData.academic.forEach(item => {
+               output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
+<strong>${item.title}</strong><br>
+<em>${item.organization}</em><br>
+<p>${item.text}</p>
+<a href="${item.link}" target="_blank">Ver Diploma</a>
+</div>`;
+           });
+       }
+
        // Volunteering Section
        if (userData.volunteering && userData.volunteering.length > 0) {
            output += "<strong>MERITO SOCIAL (Voluntariado):</strong><br>";
