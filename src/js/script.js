@@ -88,18 +88,18 @@ const userData = {
     ],
     "recommendations": [
       {
-        "name": "Pedro Teodoro",
+        "name": "Prof. Dr. Pedro Teodoro",
         "role": "Presidente do Departamento de Engenharia Marítima da ENIDH",
         "text": "O Christian distingue-se pela sua proatividade, tendo desenvolvido, com elevado grau de autonomia, projetos de relevo em sistemas embebidos, robótica e visão artificial. [...] Trata-se de um aluno responsável e colaborativo.",
         "email": "pedroteodoro@enautica.pt",
         "link": "https://drive.google.com/file/d/1TTfw5ujc2-LVvufirLCBgYL_PIMMmrfS/view?usp=drive_link"
       },
       {
-        "name": "Nome do Professor 2",
-        "role": "Cargo",
-        "text": "Texto da recomendação...",
-        "email": "email@exemplo.com",
-        "link": "#"
+        "name": "Prof. Dr. Ricardo Filipe Sereno Póvoa",
+        "role": "Coordenador da Licenciatura em Eng. Informática e Investigador no Instituto de Telecomunicações",
+        "text": "O professor destaca o desempenho académico de topo (1.º quartil) em programação de microcontroladores e a capacidade técnica demonstrada na liderança de projetos práticos, nomeadamente no desenvolvimento de protótipos de veículos autónomos e braços robóticos com visão computacional.",
+        "email": "ricardopovoa@enautica.pt",
+        "link": "https://drive.google.com/file/d/1bsIrKw29fa6UsUWAKcAR-WEuE3LU3yum/view?usp=drive_link"
       }
     ]
 };
