@@ -1,48 +1,221 @@
 {
-    "name": "Christian Rodrigues",
-    "email": "christian.rodrigues@example.com",
-    "bio": "Sou o Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
-    "resume": "https://www.linkedin.com/in/crogued/",
-    "socials": {
-      "github": "https://github.com/Crogued",
-      "linkedin": "https://www.linkedin.com/in/crogued/"
+  "name": "Christian Rodrigues",
+  "email": "christian.rodrigues0211@gmail.com",
+  "bio": "AI & Robotics Software Engineer. Robotics and AI student specialized in Artificial Intelligence and Computer Vision. Driven by the development of intelligent, autonomous systems that tackle complex, real-world challenges. From implementing real-time anomaly detection pipelines to architecting AI agents, I thrive at the intersection of deep learning and system engineering. My goal is to leverage these technologies to drive innovation in computational biomedicine and data-driven healthcare.",
+  "resume": "https://www.linkedin.com/in/crogued/",
+  "socials": {
+    "GitHub": {
+      "url": "https://github.com/Crogued",
+      "text": "Crogued"
     },
-    "projects": [
-      {
-        "name": "Naval-Rex 2025",
-        "description": "1.º Lugar no desafio da Escola Naval. Construção de barco com materiais recicláveis, focado em Team Building e resolução de problemas.",
-        "link": "https://github.com/Crogued"
-      },
-      {
-        "name": "VisionNavigation",
-        "description": "Sistema autónomo de USV para navegação por bóias usando Visão por Computador (Raspberry Pi + Arduino).",
-        "link": "https://github.com/Crogued/BuoyVisionNavigation"
-      },
-      {
-        "name": "ProjetUSVautodrone",
-        "description": "Participação na competição Autodrone 2026. Veículo de superfície não tripulado.",
-        "link": "https://github.com/Bolofofopt/ProjetUSVautodrone"
-      },
-      {
-        "name": "VectorNavigation",
-        "description": "Sistema de controlo autónomo de USV usando Navegação Vetorial e coordenadas GPS. Powered by Arduino Mega.",
-        "link": "https://github.com/Crogued/VectorNavigation"
-      },
-      {
-        "name": "HumanoidRoboticArm",
-        "description": "Braço robótico de 2DoF com mão humanóide de 5 DoF que imita comportamento humano por visão.",
-        "link": "https://github.com/Bolofofopt/HumanoidRoboticArmVision"
-      },
-      {
-        "name": "Bluetooth-RC-Car",
-        "description": "Carro RC controlado por Bluetooth com stream de vídeo ESP32-CAM, desvio de obstáculos e movimento omnidirecional.",
-        "link": "https://github.com/Crogued/Bluetooth-RC-Car"
-      }
-    ],
-    "details": {
-      "history": "Nasci na Venezuela, onde vivi até aos 13 anos. Depois emigrei com a minha família para o Chile, adaptando-me a uma nova cultura durante a adolescência. A maior prova chegou aos meus 17 anos: emigrámos para Portugal e aterrei em Oeiras em março de 2020, apenas uns dias antes de o aeroporto fechar e começar o confinamento mundial. Longe de me isolar, aproveitei esse tempo para mergulhar no código e aprender a língua, conseguindo uma adaptação total. Hoje sou trilingue (Espanhol, Português, Inglês) e considero Oeiras a minha casa.",
-      "resilience": "Sempre fui desportista. Comecei no Karaté aos 6 anos e futebol federado dos 9 aos 17. Ao chegar a Portugal, o meu talento abriu portas: fui selecionado para provas nos clubes CRC Carcavelos e Porto Salvo. No entanto, a realidade económica impôs-se. Os meus pais não podiam custear os meus estudos universitários, por isso tive de tomar uma decisão difícil: renunciar ao futebol de competição para trabalhar e pagar as propinas. Trabalhei na Caseking Iberia (montagem de PCs) e na restauração (Hamburgueria do Bairro) enquanto estudava. Essa disciplina desportiva aplico-a agora na minha engenharia.",
-      "merit": "Acredito em devolver valor à comunidade. Fui Monitor no programa 'Jovens em Movimento 2025' da Câmara Municipal de Oeiras. Supervisionei grupos de jovens e geri dinâmicas de grupo, o que me ajudou a desenvolver inteligência emocional e liderança. Sou considerado um membro ativo e relevante na minha comunidade académica (tenho 2 cartas de recomendação).",
-      "goals": "O meu objetivo é integrar-me no ecossistema científico de Oeiras Valley como especialista em Biomedicina. Se obtiver a Bolsa de Mérito, investirei os fundos em duas áreas estratégicas:\n\n1. Hardware: Aquisição de GPUs e sensores para treinar modelos de IA e visão por computador em casa.\n2. Formação: Pagar certificações avançadas em Data Science e Machine Learning para complementar a minha licenciatura."
+    "LinkedIn": {
+      "url": "https://www.linkedin.com/in/crogued/",
+      "text": "Christian Rodrigues"
+    },
+    "CV": { 
+      "url": "https://drive.google.com/file/d/1WTiB6bAAkwAQtYLaQT_ivuKyr3xmzlRC/view?usp=sharing",
+      "text": "Download CV"
     }
+  },
+  "projects": [
+    {
+      "name": "Real-Time VMS",
+      "description": "Complete Video Management System integrating YOLO architectures, ByteTrack tracking, local VLMs, and MQTT for real-time anomaly detection at Hitachi Rail.",
+      "link": "https://github.com/Crogued"
+    },
+    {
+      "name": "Nautilus Lab (Autodrone 2026)",
+      "description": "Team Captain leading ENIDH's first-ever international entry into the autonomous surface vehicle competition in Horten, Norway.",
+      "link": "https://github.com/Bolofofopt/ProjetUSVautodrone"
+    },
+    {
+      "name": "HumanoidRoboticArm",
+      "description": "2-DoF robotic arm with 5-DoF humanoid hand, controlled via real-time computer vision and gesture recognition. Published research.",
+      "link": "https://github.com/Crogued/HumanoidRoboticArmVision"
+    },
+    {
+      "name": "VectorNavigation",
+      "description": "Autonomous USV control system using vector-based GPS navigation. Core component of a Master's thesis. Validated at REPMUS25/Naval-Rex25.",
+      "link": "https://github.com/Crogued/VectorNavigation"
+    },
+    {
+      "name": "BuoyVisionNavigation",
+      "description": "Autonomous USV navigation system using computer vision for buoy detection (Raspberry Pi + Arduino).",
+      "link": "https://github.com/Crogued/BuoyVisionNavigation"
+    },
+    {
+      "name": "Bluetooth-RC-Car",
+      "description": "Bluetooth-controlled RC car with ESP32-CAM video streaming, obstacle avoidance, and omnidirectional movement.",
+      "link": "https://github.com/Crogued/Bluetooth-RC-Car"
+    }
+  ],
+  "details": {
+    "history": "Born in Venezuela, where I lived until age 13. Then I emigrated with my family to Chile, adapting to a new culture during adolescence. The biggest challenge came at 17: we emigrated to Portugal and I landed in Lisbon in March 2020, just days before the airport closed and the worldwide lockdown began. Far from isolating myself, I used that time to dive deep into code and learn the language, achieving full integration. Today I'm trilingual (Spanish, Portuguese, English) and I call Oeiras home.",
+    "resilience": "I've always been an athlete. I started Karate at age 6 and played competitive football from 9 to 17. Upon arriving in Portugal, my talent opened doors: I was selected for trials at CRC Carcavelos and Porto Salvo clubs. However, I faced a challenge of financial independence. I had to make a difficult decision: give up competitive football to work and fund my own university education. I worked at Caseking Iberia (PC assembly & hardware diagnostics) while studying. That athletic discipline now drives my engineering work."
+  },
+  "experience": [
+    {
+      "title": "Computer Vision & AI Engineering Intern",
+      "company": "Hitachi Rail",
+      "location": "Oeiras, Portugal",
+      "period": "Feb 2026 – Present",
+      "highlights": [
+        "Engineered a multi-stage AI anomaly detection cascade pipeline integrating YOLO, ByteTrack, and classical CV (MOG2 & Optical Flow).",
+        "Deployed local Vision Language Models (VLMs) for secondary anomaly verification, maintaining strict data privacy.",
+        "Built an end-to-end Video Management System (VMS) supporting concurrent RTSP streams.",
+        "Configured reverse proxies and developed a low-latency MQTT event-driven communication layer."
+      ]
+    },
+    {
+      "title": "R&D Member – Internal Strategic Projects",
+      "company": "ENIDH (Escola Superior Náutica Infante D. Henrique)",
+      "location": "Oeiras, Portugal",
+      "period": "Oct 2024 – Present",
+      "highlights": [
+        "Pioneered a new R&D division by independently conceptualizing and executing advanced robotics and AI projects.",
+        "Co-authored a published scientific paper on vision-controlled robotics.",
+        "Established an international AI Agents research collaboration with PUC-Rio (Brazil).",
+        "Currently directing a project portfolio: Autodrone 2026 USV, vision-controlled robotic arm, and a full-size humanoid robot."
+      ]
+    },
+    {
+      "title": "Operations Assistant Intern",
+      "company": "Caseking Iberia",
+      "location": "Sintra, Portugal",
+      "period": "Apr 2023 – Jul 2023",
+      "highlights": [
+        "High-performance PC assembly, software installation, hardware diagnostics, and benchmarking.",
+        "Stock management, quality control, and logistics coordination."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Robotics & AI (EQF Level 5)",
+      "institution": "ENIDH – Escola Superior Náutica Infante D. Henrique",
+      "period": "Sep 2024 – Present",
+      "grade": "18/20 GPA",
+      "details": "Key Coursework: Computer Vision, Advanced C++/Python, Machine Learning, Industrial Automation."
+    },
+    {
+      "degree": "Programming & Information Systems Management (EQF Level 4)",
+      "institution": "School São João do Estoril",
+      "period": "Sep 2020 – Jul 2023",
+      "grade": "17/20 GPA (High Distinction)",
+      "details": "Core Skills: Systems Analysis, Object-Oriented Programming, Data Structures."
+    }
+  ],
+  "publications": [
+    {
+      "title": "Vision-Controlled Humanoid Robotic Arm",
+      "year": "2026",
+      "role": "Co-Author",
+      "description": "Scientific paper detailing the engineering and development of a humanoid robotic arm controlled entirely through real-time computer vision and gesture recognition.",
+      "link": "https://drive.google.com/file/d/1NeKzmOS-XQdO57JAubXAMUOJMGa5moDJ/view?usp=drive_link"
+    },
+    {
+      "title": "AI Agents Integration",
+      "year": "2026",
+      "role": "Lead Researcher",
+      "description": "Scientific article on AI Agents developed in international collaboration with PUC-Rio (Brazil). In Development."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Python Essentials 1",
+      "issuer": "Cisco",
+      "date": "Jan 2025",
+      "link": "https://www.credly.com/badges/b8b51428-fdce-4960-9212-f202f7a4523b/public_url"
+    },
+    {
+      "name": "Introduction to Generative AI",
+      "issuer": "Google Cloud",
+      "date": "Jan 2024",
+      "link": "https://www.coursera.org/account/accomplishments/verify/CG9EQBFRDVTU"
+    },
+    {
+      "name": "3D Printing and Fast Prototyping",
+      "issuer": "ENIDH",
+      "date": "Jun 2025",
+      "link": "https://drive.google.com/file/d/1C6wafzjM6Vdg1OuAXXPnOwM_UGSi2dM_/view?usp=sharing"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Presidential Commendation – University Open Day",
+      "issuer": "ENIDH",
+      "date": "May 2026",
+      "description": "Formal recognition from the University President for outstanding technical contributions following a public exhibition of a two-year AI and robotics portfolio.",
+      "link": "https://drive.google.com/file/d/1GdccctKY9diAzStRr6rKSb-pdARsQ3Ss/view?usp=drive_link"
+    },
+    {
+      "title": "1st Place – Team Building Challenge (NAVAL-REX 25)",
+      "issuer": "Marinha – Escola Naval",
+      "date": "Sep 2025",
+      "description": "1st place in the Team Building Challenge during the REPMUS/Naval-Rex 25 international maritime robotics exercises.",
+      "link": "https://drive.google.com/file/d/1i5SGNqI2sLuKa1E5feS8c1766l_jvPBO/view?usp=drive_link"
+    },
+    {
+      "title": "Caixa Mais Mundo Awards",
+      "issuer": "Caixa Geral de Depósitos",
+      "date": "Apr 2025",
+      "description": "University Entrance Merit Scholarship – recognition of academic excellence upon admission to Higher Education.",
+      "link": "https://drive.google.com/file/d/1KwD29FPPptovRjT7-rhKLZxhiP7WoL2K/view?usp=drive_link"
+    },
+    {
+      "title": "Cascais 2023 Awards – High School Honors",
+      "issuer": "Cascais City Hall",
+      "date": "Nov 2023",
+      "description": "High School Honors Award for academic excellence.",
+      "link": "https://drive.google.com/file/d/1qv7lIrDb-sGe6RgTvnjUZpSyEzUy0r1F/view?usp=drive_link"
+    }
+  ],
+  "volunteering": [
+    {
+      "role": "Youth Camp Counselor",
+      "program": "Jovens em Movimento 2025",
+      "organization": "Municipality of Oeiras",
+      "period": "Jun 2025 – Aug 2025",
+      "text": "Supervision and guidance of youth groups, facilitation of recreational and educational activities, safety management and conflict resolution."
+    }
+  ],
+  "recommendations": [
+    {
+      "name": "Prof. Dr. Pedro Teodoro",
+      "role": "President of the Department of Maritime Engineering at ENIDH",
+      "text": "Christian stands out for his proactivity, having developed, with a high degree of autonomy, significant projects in embedded systems, robotics, and computer vision. He is a responsible and collaborative student.",
+      "email": "pedroteodoro@enautica.pt",
+      "link": "https://drive.google.com/file/d/1TTfw5ujc2-LVvufirLCBgYL_PIMMmrfS/view?usp=drive_link"
+    },
+    {
+      "name": "Prof. Dr. Ricardo Filipe Sereno Póvoa",
+      "role": "Coordinator of the Computer Engineering Degree & Researcher at Instituto de Telecomunicações",
+      "text": "Highlights top-quartile academic performance in microcontroller programming and proven technical capabilities in leading practical projects, notably autonomous vehicle prototypes and robotic arms with computer vision.",
+      "email": "ricardopovoa@enautica.pt",
+      "link": "https://drive.google.com/file/d/1bsIrKw29fa6UsUWAKcAR-WEuE3LU3yum/view?usp=drive_link"
+    }
+  ],
+  "skills": [
+    "Artificial Intelligence (AI)",
+    "Computer Vision",
+    "Deep Learning",
+    "Python",
+    "C++",
+    "C",
+    "Linux",
+    "Git",
+    "Arduino IDE",
+    "YOLO",
+    "OpenCV",
+    "MQTT",
+    "Raspberry Pi",
+    "3D Printing",
+    "Project Management",
+    "Team Leadership",
+    "Problem Solving",
+    "Security Management",
+    "Decision-Making",
+    "Teamwork",
+    "Autonomous Vehicles"
+  ]
 }

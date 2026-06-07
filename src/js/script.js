@@ -4,18 +4,26 @@ const terminal = document.getElementById("terminal");
 // New scrollable container reference
 let terminalBody; 
 
+window.setCommandLine = function(cmd) {
+  const input = document.getElementById("command-line");
+  if (input) {
+    input.value = cmd;
+    input.focus();
+  }
+};
+
 // Configuration variables
 let specialCommands = {};
 let aboutCommands = {};
 let socials = {};
-let header = "Bem-vindo ao terminal de Christian Rodrigues,\nDigite 'help' para ver os comandos disponíveis ou clique em 'Tutorial' para ver um breve tutorial.\n\nUse o scroll do rato para ver mais contéudo.";
-let title = "Christian Rodrigues | PorfolioShell";
+let header = "Welcome to Christian Rodrigues' portfolio.\nType 'help' to see available commands or click 'Tutorial' for a brief walkthrough.\n\nUse mouse scroll to see more content.";
+let title = "Christian Rodrigues | PortfolioShell";
 
 // Embed user data directly to avoid CORS issues with local file fetch
 const userData = {
     "name": "Christian Rodrigues",
     "email": "christian.rodrigues0211@gmail.com",
-    "bio": " Sou Christian Rodrigues, um estudante de Robótica e IA com média de 17 valores na ENIDH. O meu perfil combina engenharia pura (C++, Linux, Python) com uma forte resiliência pessoal. Defino-me como um solucionador de problemas que procura especializar-se em Biomedicina Computacional para unir tecnologia e saúde.",
+    "bio": "AI & Robotics Software Engineer. Robotics and AI student specialized in Artificial Intelligence and Computer Vision. Driven by the development of intelligent, autonomous systems that tackle complex, real-world challenges. From implementing real-time anomaly detection pipelines to architecting AI agents, I thrive at the intersection of deep learning and system engineering. My goal is to leverage these technologies to drive innovation in computational biomedicine and data-driven healthcare.",
     "resume": "https://www.linkedin.com/in/crogued/",
     "socials": {
       "GitHub": {
@@ -27,82 +35,212 @@ const userData = {
         "text": "Christian Rodrigues"
       },
       "CV": { 
-        "url": "https://drive.google.com/file/d/1DW-puFjLr49Y0WNBVvx0s56sXMV2tTZt/view?usp=drive_link",
-        "text": "Christian Rodrigues"
+        "url": "https://drive.google.com/file/d/1WTiB6bAAkwAQtYLaQT_ivuKyr3xmzlRC/view?usp=sharing",
+        "text": "Download CV"
       }
     },
     "projects": [
       {
-        "name": "Naval-Rex 2025",
-        "description": "1.º Lugar no desafio da Escola Naval. Construção de barco com materiais recicláveis, focado em Team Building e resolução de problemas. <br><a href='https://sapo.pt/artigo/escola-nautica-reforca-presenca-portuguesa-no-maior-exercicio-mundial-de-robotica-maritima-68c435dc0e9d7127e2de960f' target='_blank'>Ler Artigo no SAPO</a>",
-        "link": "https://drive.google.com/file/d/1i5SGNqI2sLuKa1E5feS8c1766l_jvPBO/view?usp=drive_link"
+        "name": "Real-Time VMS",
+        "description": "Complete Video Management System integrating YOLO architectures, ByteTrack tracking, local VLMs, and MQTT for real-time anomaly detection at Hitachi Rail.",
+        "link": "https://github.com/Crogued"
       },
       {
-        "name": "VisionNavigation",
-        "description": "Sistema autónomo de USV para navegação por bóias usando Visão por Computador (Raspberry Pi + Arduino).",
-        "link": "https://github.com/Crogued/BuoyVisionNavigation"
-      },
-      {
-        "name": "ProjetUSVautodrone",
-        "description": "Participação na competição Autodrone 2026. Veículo de superfície não tripulado.",
+        "name": "Nautilus Lab (Autodrone 2026)",
+        "description": "Team Captain leading ENIDH's first-ever international entry into the autonomous surface vehicle competition in Horten, Norway.",
         "link": "https://github.com/Bolofofopt/ProjetUSVautodrone"
       },
       {
+        "name": "HumanoidRoboticArm",
+        "description": "2-DoF robotic arm with 5-DoF humanoid hand, controlled via real-time computer vision and gesture recognition. Published research.",
+        "link": "https://github.com/Crogued/HumanoidRoboticArmVision"
+      },
+      {
         "name": "VectorNavigation",
-        "description": "Sistema de controlo autónomo de USV usando Navegação Vetorial e coordenadas GPS. Powered by Arduino Mega.",
+        "description": "Autonomous USV control system using vector-based GPS navigation. Core component of a Master's thesis. Validated at REPMUS25/Naval-Rex25.",
         "link": "https://github.com/Crogued/VectorNavigation"
       },
       {
-        "name": "HumanoidRoboticArm",
-        "description": "Braço robótico de 2DoF com mão humanóide de 5 DoF que imita comportamento humano por visão.",
-        "link": "https://github.com/Bolofofopt/HumanoidRoboticArmVision"
+        "name": "BuoyVisionNavigation",
+        "description": "Autonomous USV navigation system using computer vision for buoy detection (Raspberry Pi + Arduino).",
+        "link": "https://github.com/Crogued/BuoyVisionNavigation"
       },
       {
         "name": "Bluetooth-RC-Car",
-        "description": "Carro RC controlado por Bluetooth com stream de vídeo ESP32-CAM, desvio de obstáculos e movimento omnidirecional.",
+        "description": "Bluetooth-controlled RC car with ESP32-CAM video streaming, obstacle avoidance, and omnidirectional movement.",
         "link": "https://github.com/Crogued/Bluetooth-RC-Car"
       }
     ],
     "details": {
-      "history": "Nasci na Venezuela, onde vivi até aos 13 anos. Depois emigrei com a minha família para o Chile, adaptando-me a uma nova cultura durante a adolescência. A maior prova chegou aos meus 17 anos: emigrámos para Portugal e aterrei em Lisboa em março de 2020, apenas uns dias antes de o aeroporto fechar e começar o confinamento mundial. Longe de me isolar, aproveitei esse tempo para mergulhar no código e aprender a língua, conseguindo uma adaptação total. Hoje sou trilingue (Espanhol, Português, Inglês) e considero Oeiras a minha casa.",
-      "resilience": "Sempre fui desportista. Comecei no Karaté aos 6 anos e futebol federado dos 9 aos 17. Ao chegar a Portugal, o meu talento abriu portas: fui selecionado para provas nos clubes CRC Carcavelos e Porto Salvo. No entanto, enfrentei um desafio de independência financeira. Os meus pais decidiram que eu deveria custear os meus próprios estudos universitários, por isso tive de tomar uma decisão difícil: renunciar ao futebol de competição para trabalhar e pagar as propinas. Trabalhei na Caseking Iberia (montagem de PCs) e na restauração (Hamburgueria do Bairro) enquanto estudava. Essa disciplina desportiva aplico-a agora na minha engenharia.",
-      "merit": "",
-      "goals": "O FUNDAMENTAL: A Bolsa de Mérito servirá para pagar as propinas da minha Licenciatura em Biomedicina Computacional e Inteligência Artificial na Universidade Lusófona. Este é o meu grande objetivo.\n\nInvestimentos Secundários (com o remanescente):\n1. Hardware: GPUs e sensores para os meus projetos de robótica em casa.\n2. Certificações: Formação extra em Data Science."
+      "history": "Born in Venezuela, where I lived until age 13. Then I emigrated with my family to Chile, adapting to a new culture during adolescence. The biggest challenge came at 17: we emigrated to Portugal and I landed in Lisbon in March 2020, just days before the airport closed and the worldwide lockdown began. Far from isolating myself, I used that time to dive deep into code and learn the language, achieving full integration. Today I'm trilingual (Spanish, Portuguese, English) and I call Oeiras home.",
+      "resilience": "I've always been an athlete. I started Karate at age 6 and played competitive football from 9 to 17. Upon arriving in Portugal, my talent opened doors: I was selected for trials at CRC Carcavelos and Porto Salvo clubs. However, I faced a challenge of financial independence. I had to make a difficult decision: give up competitive football to work and fund my own university education. I worked at Caseking Iberia (PC assembly & hardware diagnostics) while studying. That athletic discipline now drives my engineering work."
     },
-    "academic": [
+    "experience": [
       {
-        "title": "Diploma de Mérito - Prémios Caixa + Mundo",
-        "organization": "Caixa Geral de Depósitos",
-        "text": "Prémio atribuído por ter ingressado com a melhor nota do meu curso (17 valores).",
+        "title": "Computer Vision & AI Engineering Intern",
+        "company": "Hitachi Rail",
+        "location": "Oeiras, Portugal",
+        "period": "Feb 2026 – Present",
+        "highlights": [
+          "Engineered a multi-stage AI anomaly detection cascade pipeline integrating YOLO, ByteTrack, and classical CV (MOG2 & Optical Flow).",
+          "Deployed local Vision Language Models (VLMs) for secondary anomaly verification, maintaining strict data privacy.",
+          "Built an end-to-end Video Management System (VMS) supporting concurrent RTSP streams.",
+          "Configured reverse proxies and developed a low-latency MQTT event-driven communication layer."
+        ]
+      },
+      {
+        "title": "R&D Member – Internal Strategic Projects",
+        "company": "ENIDH (Escola Superior Náutica Infante D. Henrique)",
+        "location": "Oeiras, Portugal",
+        "period": "Oct 2024 – Present",
+        "highlights": [
+          "Pioneered a new R&D division by independently conceptualizing and executing advanced robotics and AI projects.",
+          "Co-authored a published scientific paper on vision-controlled robotics.",
+          "Established an international AI Agents research collaboration with PUC-Rio (Brazil).",
+          "Currently directing a project portfolio: Autodrone 2026 USV, vision-controlled robotic arm, and a full-size humanoid robot."
+        ]
+      },
+      {
+        "title": "Operations Assistant Intern",
+        "company": "Caseking Iberia",
+        "location": "Sintra, Portugal",
+        "period": "Apr 2023 – Jul 2023",
+        "highlights": [
+          "High-performance PC assembly, software installation, hardware diagnostics, and benchmarking.",
+          "Stock management, quality control, and logistics coordination."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Robotics & AI (EQF Level 5)",
+        "institution": "ENIDH – Escola Superior Náutica Infante D. Henrique",
+        "period": "Sep 2024 – Present",
+        "grade": "18/20 GPA",
+        "details": "Key Coursework: Computer Vision, Advanced C++/Python, Machine Learning, Industrial Automation."
+      },
+      {
+        "degree": "Programming & Information Systems Management (EQF Level 4)",
+        "institution": "School São João do Estoril",
+        "period": "Sep 2020 – Jul 2023",
+        "grade": "17/20 GPA (High Distinction)",
+        "details": "Core Skills: Systems Analysis, Object-Oriented Programming, Data Structures."
+      }
+    ],
+    "publications": [
+      {
+        "title": "Vision-Controlled Humanoid Robotic Arm",
+        "year": "2026",
+        "role": "Co-Author",
+        "description": "Scientific paper detailing the engineering and development of a humanoid robotic arm controlled entirely through real-time computer vision and gesture recognition.",
+        "link": "https://drive.google.com/file/d/1NeKzmOS-XQdO57JAubXAMUOJMGa5moDJ/view?usp=drive_link"
+      },
+      {
+        "title": "AI Agents Integration",
+        "year": "2026",
+        "role": "Lead Researcher",
+        "description": "Scientific article on AI Agents developed in international collaboration with PUC-Rio (Brazil). In Development."
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Python Essentials 1",
+        "issuer": "Cisco",
+        "date": "Jan 2025",
+        "link": "https://www.credly.com/badges/b8b51428-fdce-4960-9212-f202f7a4523b/public_url"
+      },
+      {
+        "name": "Introduction to Generative AI",
+        "issuer": "Google Cloud",
+        "date": "Jan 2024",
+        "link": "https://www.coursera.org/account/accomplishments/verify/CG9EQBFRDVTU"
+      },
+      {
+        "name": "3D Printing and Fast Prototyping",
+        "issuer": "ENIDH",
+        "date": "Jun 2025",
+        "link": "https://drive.google.com/file/d/1C6wafzjM6Vdg1OuAXXPnOwM_UGSi2dM_/view?usp=sharing"
+      }
+    ],
+    "awards": [
+      {
+        "title": "Presidential Commendation – University Open Day",
+        "issuer": "ENIDH",
+        "date": "May 2026",
+        "description": "Formal recognition from the University President for outstanding technical contributions following a public exhibition of a two-year AI and robotics portfolio.",
+        "link": "https://drive.google.com/file/d/1GdccctKY9diAzStRr6rKSb-pdARsQ3Ss/view?usp=drive_link"
+      },
+      {
+        "title": "1st Place – Team Building Challenge (NAVAL-REX 25)",
+        "issuer": "Marinha – Escola Naval",
+        "date": "Sep 2025",
+        "description": "1st place in the Team Building Challenge during the REPMUS/Naval-Rex 25 international maritime robotics exercises.",
+        "link": "https://drive.google.com/file/d/1i5SGNqI2sLuKa1E5feS8c1766l_jvPBO/view?usp=drive_link"
+      },
+      {
+        "title": "Caixa Mais Mundo Awards",
+        "issuer": "Caixa Geral de Depósitos",
+        "date": "Apr 2025",
+        "description": "University Entrance Merit Scholarship – recognition of academic excellence upon admission to Higher Education.",
         "link": "https://drive.google.com/file/d/1KwD29FPPptovRjT7-rhKLZxhiP7WoL2K/view?usp=drive_link"
+      },
+      {
+        "title": "Cascais 2023 Awards – High School Honors",
+        "issuer": "Cascais City Hall",
+        "date": "Nov 2023",
+        "description": "High School Honors Award for academic excellence.",
+        "link": "https://drive.google.com/file/d/1qv7lIrDb-sGe6RgTvnjUZpSyEzUy0r1F/view?usp=drive_link"
       }
     ],
     "volunteering": [
       {
-        "role": "Monitor",
+        "role": "Youth Camp Counselor",
         "program": "Jovens em Movimento 2025",
-        "organization": "Câmara Municipal de Oeiras",
-        "text": "Acredito em devolver valor à comunidade. Supervisionei grupos de jovens e geri dinâmicas de grupo, o que me ajudou a desenvolver inteligência emocional e liderança. Sou considerado um membro ativo e relevante na minha comunidade académica.",
-        "link": "https://drive.google.com/file/d/1hjWy75A1Qptb1Z6U-g5BHEc2a6YzgN-E/view?usp=drive_link"
+        "organization": "Municipality of Oeiras",
+        "period": "Jun 2025 – Aug 2025",
+        "text": "Supervision and guidance of youth groups, facilitation of recreational and educational activities, safety management and conflict resolution."
       }
     ],
     "recommendations": [
       {
         "name": "Prof. Dr. Pedro Teodoro",
-        "role": "Presidente do Departamento de Engenharia Marítima da ENIDH",
-        "text": "O Christian distingue-se pela sua proatividade, tendo desenvolvido, com elevado grau de autonomia, projetos de relevo em sistemas embebidos, robótica e visão artificial. [...] Trata-se de um aluno responsável e colaborativo.",
+        "role": "President of the Department of Maritime Engineering at ENIDH",
+        "text": "Christian stands out for his proactivity, having developed, with a high degree of autonomy, significant projects in embedded systems, robotics, and computer vision. He is a responsible and collaborative student.",
         "email": "pedroteodoro@enautica.pt",
         "link": "https://drive.google.com/file/d/1TTfw5ujc2-LVvufirLCBgYL_PIMMmrfS/view?usp=drive_link"
       },
       {
         "name": "Prof. Dr. Ricardo Filipe Sereno Póvoa",
-        "role": "Coordenador da Licenciatura em Eng. Informática e Investigador no Instituto de Telecomunicações",
-        "text": "O professor destaca o desempenho académico de topo (1.º quartil) em programação de microcontroladores e a capacidade técnica demonstrada na liderança de projetos práticos, nomeadamente no desenvolvimento de protótipos de veículos autónomos e braços robóticos com visão computacional.",
+        "role": "Coordinator of the Computer Engineering Degree & Researcher at Instituto de Telecomunicações",
+        "text": "Highlights top-quartile academic performance in microcontroller programming and proven technical capabilities in leading practical projects, notably autonomous vehicle prototypes and robotic arms with computer vision.",
         "email": "ricardopovoa@enautica.pt",
         "link": "https://drive.google.com/file/d/1bsIrKw29fa6UsUWAKcAR-WEuE3LU3yum/view?usp=drive_link"
       }
+    ],
+    "skills": [
+      "Artificial Intelligence (AI)",
+      "Computer Vision",
+      "Deep Learning",
+      "Python",
+      "C++",
+      "C",
+      "Linux",
+      "Git",
+      "Arduino IDE",
+      "YOLO",
+      "OpenCV",
+      "MQTT",
+      "Raspberry Pi",
+      "3D Printing",
+      "Project Management",
+      "Team Leadership",
+      "Problem Solving",
+      "Security Management",
+      "Decision-Making",
+      "Teamwork",
+      "Autonomous Vehicles"
     ]
-};
+}
 
 let matrixCanvas = null;
 let matrixAnimationFrame = null;
@@ -117,228 +255,309 @@ const generalCommands = {
       clearTerminal();
       return null;
     },
-    description: "Limpar o terminal. Manter a organizacao."
+    description: "Clear the terminal screen."
   },
 
   ls: {
     execute: () => {
-      return "bio.txt\nhistoria.txt\nresiliencia.txt\nmerito.txt\nmetas.txt\nprojetos.txt\ncommands.json\nindex.html\nREADME.md\nscript.js\nstyles.css";
+      return "about.txt    experience.txt    education.txt    projects.txt\npublications.txt    certifications.txt    awards.txt    skills.txt\nREADME.md    commands.json    index.html    script.js    styles.css";
     },
-    description: "Listar ficheiros no diretorio atual."
+    description: "List files in the current directory."
   },
 
   cat: {
     execute: (args) => {
       if (args.length === 0) {
-        return "Uso: cat [nome_do_ficheiro].\nDigite 'ls' para ver os ficheiros disponíveis.";
+        return "Usage: cat [filename].\nType 'ls' to see available files.";
       }
       
       const filename = args[0].toLowerCase();
-      // Ensure userData is loaded
       const files = {
-        "readme.md": "# Portfolio Terminal\n\nUma pagina de portfolio estilo terminal para Christian Rodrigues.",
-        "bio.txt": userData?.bio || "Dados nao disponiveis.",
-        "historia.txt": userData?.details?.history || "Historia nao disponivel.",
-        "resiliencia.txt": userData?.details?.resilience || "Info de resiliencia nao disponivel.",
-        "merito.txt": userData?.details?.merit || "Info de merito nao disponivel.",
-        "metas.txt": userData?.details?.goals || "Metas nao disponiveis.",
-        "projetos.txt": "Use o comando 'projetos' para uma melhor visualizacao.",
-        "commands.json": "Este ficheiro contem os comandos especiais para este terminal.",
-        "certificacoes.txt": "Cisco Python Essentials, Google Generative AI."
+        "readme.md": "# Portfolio Terminal\n\nA terminal-style portfolio page for Christian Rodrigues.",
+        "about.txt": userData?.bio || "Data not available.",
+        "experience.txt": "Use the 'experience' command for a better view.",
+        "education.txt": "Use the 'education' command for a better view.",
+        "projects.txt": "Use the 'projects' command for a better view.",
+        "publications.txt": "Use the 'publications' command for a better view.",
+        "certifications.txt": "Use the 'certifications' command for a better view.",
+        "awards.txt": "Use the 'awards' command for a better view.",
+        "skills.txt": userData?.skills ? userData.skills.join(" | ") : "Data not available.",
+        "commands.json": "This file contains the special commands for this terminal."
       };
       
       if (files[filename]) {
         return files[filename];
       } else {
-        return `cat: ${filename}: Ficheiro ou diretorio inexistente.\nDigite 'ls' para ver os ficheiros disponíveis.`;
+        return `cat: ${filename}: No such file or directory.\nType 'ls' to see available files.`;
       }
     },
-    description: "Ler ficheiros (Ex: 'cat bio.txt')."
+    description: "Read file contents (e.g., 'cat about.txt')."
   },
   man: {
     execute: (args) => {
       if (args.length === 0) {
-        return "Manual de uso. Ex: 'man ls'";
+        return "Usage: man [command]";
       }
       
       const command = args[0];
       
       if (generalCommands[command]) {
-        return `NOME\n    ${command} - ${generalCommands[command].description}\n\nDESCRICAO\n    ${getManualDescription(command)}`;
+        return `NAME\n    ${command} - ${generalCommands[command].description}\n\nDESCRIPTION\n    ${getManualDescription(command)}`;
       } else if (specialCommands[command]) {
-        return `NOME\n    ${command} - ${specialCommands[command].description}\n\nDESCRICAO\n    Comando especial do portfolio.`;
+        return `NAME\n    ${command} - ${specialCommands[command].description}\n\nDESCRIPTION\n    Special portfolio command.`;
       } else {
-        return `Sem entrada manual para ${command}`;
+        return `No manual entry for ${command}`;
       }
     },
-    description: "Manual dos comandos (Ex: 'man ls')."
+    description: "Command manual (e.g., 'man ls')."
   },
 
   history: {
     execute: () => {
-      return commandHistory.join("\n") || "Ainda sem historico";
+      return commandHistory.join("\n") || "No history yet";
     },
-    description: "Historico de comandos recentes."
+    description: "Recent command history."
   },
   help: {
     execute: () => {
-      // 0. Como Interagir (New)
-      let output = "<div><strong>COMO INTERAGIR:</strong></div>";
-      output += "<div>1. Escolha um comando da lista abaixo.</div>";
-      output += "<div>2. Escreva-o e pressione <span class='command'>ENTER</span>.</div><br>";
+      // 0. How to Interact
+      let output = "<div><strong>HOW TO INTERACT:</strong></div>";
+      output += "<div>1. Pick a command from the list below.</div>";
+      output += "<div>2. Type it and press <span class='command'>ENTER</span>.</div><br>";
 
-      // 1. Dica Pro
-      output += "<div><strong>💡 Dica Pro:</strong></div>";
-      output += "<div>Para ver ficheiros use <span class='command'>ls</span>.</div>";
-      output += "<div>Para le-los use <span class='command'>'cat [nome]'</span>. Exemplo: <span class='command'>cat bio.txt</span></div><br>";
+      // 1. Pro Tip
+      output += "<div><strong>💡 Pro Tip:</strong></div>";
+      output += "<div>To see files type <span class='command'>ls</span>.</div>";
+      output += "<div>To read them type <span class='command'>'cat [name]'</span>. Example: <span class='command'>cat about.txt</span></div><br>";
       
-      // 2. Todos os Comandos
-      output += "<div><strong>Todos os Comandos:</strong></div><table>";
-      // Add general commands
-      for (let cmd in generalCommands) {
-        if (!generalCommands[cmd].hidden) {
-             output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
-        }
-      }
-      // Add special commands
-      for (let cmd in specialCommands) {
-        output += `<tr><td class="available-command">${cmd}</td><td class="command-description">${specialCommands[cmd].description}</td></tr>`;
-      }
+      // 2. Suggested Commands
+      output += "<div><strong>Suggested Commands:</strong> (Click on any command to select it)</div>";
+      output += "<table>";
+      output += `<tr><td class="available-command" onclick="setCommandLine('about')">about</td><td class="command-description">Who I am – bio, story, and resilience.</td></tr>`;
+      output += `<tr><td class="available-command" onclick="setCommandLine('experience')">experience</td><td class="command-description">My professional work experience.</td></tr>`;
+      output += `<tr><td class="available-command" onclick="setCommandLine('projects')">projects</td><td class="command-description">Technical projects and competitions.</td></tr>`;
+      output += `<tr><td class="available-command" onclick="setCommandLine('education')">education</td><td class="command-description">Academic background and coursework.</td></tr>`;
+      output += `<tr><td class="available-command" onclick="setCommandLine('skills')">skills</td><td class="command-description">Technical skills and technologies.</td></tr>`;
       output += "</table><br>";
 
-      // 3. Comandos Sugeridos
-      output += "<div><strong>Comandos Sugeridos:</strong></div>";
-      output += "<table>";
-      output += `<tr><td class="available-command">sobre</td><td class="command-description">Quem sou, a minha história e resiliência.</td></tr>`;
-      output += `<tr><td class="available-command">projetos</td><td class="command-description">Os meus projetos técnicos e competições.</td></tr>`;
-      output += `<tr><td class="available-command">metas</td><td class="command-description">Objetivos para a Bolsa de Mérito e futuro.</td></tr>`;
-      output += `<tr><td class="available-command">meritos</td><td class="command-description">Envolvimento comunitário e cartas de recomendação.</td></tr>`;
+      // 3. All Commands
+      output += "<div><strong>All Commands:</strong></div><table>";
+      for (let cmd in generalCommands) {
+        if (!generalCommands[cmd].hidden) {
+             output += `<tr><td class="available-command" onclick="setCommandLine('${cmd}')">${cmd}</td><td class="command-description">${generalCommands[cmd].description}</td></tr>`;
+        }
+      }
+      for (let cmd in specialCommands) {
+        output += `<tr><td class="available-command" onclick="setCommandLine('${cmd}')">${cmd}</td><td class="command-description">${specialCommands[cmd].description}</td></tr>`;
+      }
       output += "</table>";
       
       return output;
     },
-    description: "Lista de comandos disponíveis."
+    description: "List all available commands."
   },
-  jogos: {
+  games: {
     execute: () => {
-      return `<strong>JOGOS DISPONÍVEIS:</strong> (Digite o nome do jogo para iniciar)<br>
-<span class='command'>rps</span>   - Pedra, Papel, Tesoura<br>
-<span class='command'>ttt</span>   - Jogo do Galo (Tic Tac Toe)<br>
-<span class='command'>simon</span> - Simon Says (Memória)`;
+      return `<strong>AVAILABLE GAMES:</strong> (Type the game name to start)<br>
+<span class='command'>rps</span>   - Rock, Paper, Scissors<br>
+<span class='command'>ttt</span>   - Tic Tac Toe<br>
+<span class='command'>simon</span> - Simon Says (Memory)`;
     },
-    description: "Menu de jogos interativos."
+    description: "Interactive games menu."
   },
   rps: {
     execute: () => {
       return startRPS();
     },
-    description: "Jogar Pedra, Papel, Tesoura.",
+    description: "Play Rock, Paper, Scissors.",
     hidden: true
   },
   ttt: {
     execute: () => {
       return startTTT();
     },
-    description: "Jogar Jogo do Galo.",
+    description: "Play Tic Tac Toe.",
     hidden: true
   },
   simon: {
     execute: () => {
       return startSimon();
     },
-    description: "Jogar Simon Says.",
+    description: "Play Simon Says.",
     hidden: true
   },
-  sobre: {
+  about: {
     execute: () => {
-       if (!isUserDataAvailable()) return "Dados nao disponiveis.";
+       if (!isUserDataAvailable()) return "Data not available.";
        return `
-<strong>QUEM SOU:</strong><br>
+<strong>WHO I AM:</strong><br>
 ${userData.bio}<br><br>
 
-<strong>A MINHA HISTORIA:</strong><br>
+<strong>MY STORY:</strong><br>
 ${userData.details?.history}<br><br>
 
-<strong>SACRIFICIO E RESILIENCIA:</strong><br>
+<strong>RESILIENCE:</strong><br>
 ${userData.details?.resilience}
        `.trim();
     },
-    description: "A minha historia completa (Bio, Historia, Resiliencia)."
+    description: "My full story – bio, journey, and resilience."
   },
-  meritos: {
+  experience: {
     execute: () => {
-       if (!isUserDataAvailable("details")) return "Dados nao disponiveis.";
+       if (!userData?.experience || userData.experience.length === 0) return "Data not available.";
        
-       let output = "";
+       let output = "<strong>WORK EXPERIENCE:</strong><br>";
+       userData.experience.forEach(exp => {
+           output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
+<strong>${exp.title}</strong><br>
+<em>${exp.company}</em> | ${exp.location}<br>
+<span style="color: var(--bright-black-color);">${exp.period}</span><br>`;
+           if (exp.highlights) {
+               exp.highlights.forEach(h => {
+                   output += `<span style="color: var(--white-color);">• ${h}</span><br>`;
+               });
+           }
+           output += `</div>`;
+       });
+       return output;
+    },
+    description: "Professional work experience."
+  },
+  education: {
+    execute: () => {
+       if (!userData?.education || userData.education.length === 0) return "Data not available.";
        
-       // Academic Section
-       if (userData.academic && userData.academic.length > 0) {
-           output += "<strong>MÉRITO ACADÉMICO:</strong><br>";
-           userData.academic.forEach(item => {
-               output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
-<strong>${item.title}</strong><br>
-<em>${item.organization}</em><br>
-<p>${item.text}</p>
-<a href="${item.link}" target="_blank">Ver Diploma</a>
+       let output = "<strong>EDUCATION:</strong><br>";
+       userData.education.forEach(edu => {
+           output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--blue-color);">
+<strong>${edu.degree}</strong><br>
+<em>${edu.institution}</em><br>
+<span style="color: var(--bright-black-color);">${edu.period}</span> | Grade: <span style="color: var(--green-color);">${edu.grade}</span><br>
+<span style="color: var(--white-color);">${edu.details}</span>
 </div>`;
-           });
-       }
+       });
+       return output;
+    },
+    description: "Academic background and coursework."
+  },
+  publications: {
+    execute: () => {
+       if (!userData?.publications || userData.publications.length === 0) return "Data not available.";
+       
+       let output = "<strong>PUBLICATIONS:</strong><br>";
+       userData.publications.forEach(pub => {
+           output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--purple-color);">
+<strong>${pub.title}</strong> [${pub.year}]<br>
+<em>Role: ${pub.role}</em><br>
+<span style="color: var(--white-color);">${pub.description}</span>`;
+           if (pub.link) {
+               output += `<br><a href="${pub.link}" target="_blank">Read Article</a>`;
+           }
+           output += `</div>`;
+       });
+       return output;
+    },
+    description: "Research publications and papers."
+  },
+  certifications: {
+    execute: () => {
+       if (!userData?.certifications || userData.certifications.length === 0) return "Data not available.";
+       
+       let output = "<strong>CERTIFICATIONS:</strong><br><table>";
+       userData.certifications.forEach(cert => {
+           output += `<tr><td class="name">${cert.name}</td><td class="description">${cert.issuer}</td><td style="color: var(--bright-black-color); padding: 10px 20px;">${cert.date}</td>`;
+           if (cert.link) {
+               output += `<td class="link"><a href="${cert.link}" target="_blank">View Certificate</a></td>`;
+           } else {
+               output += `<td></td>`;
+           }
+           output += `</tr>`;
+       });
+       output += "</table>";
+       return output;
+    },
+    description: "Professional certifications."
+  },
+  awards: {
+    execute: () => {
+       if (!userData?.awards || userData.awards.length === 0) return "Data not available.";
+       
+       let output = "<strong>HONORS & AWARDS:</strong><br>";
+       userData.awards.forEach(award => {
+           output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--yellow-color);">
+<strong>${award.title}</strong><br>
+<em>${award.issuer}</em> | <span style="color: var(--bright-black-color);">${award.date}</span><br>
+<span style="color: var(--white-color);">${award.description}</span>`;
+           if (award.link) {
+               output += `<br><a href="${award.link}" target="_blank">View Certificate</a>`;
+           }
+           output += `</div>`;
+       });
+       return output;
+    },
+    description: "Honors and awards."
+  },
+  skills: {
+    execute: () => {
+       if (!userData?.skills || userData.skills.length === 0) return "Data not available.";
+       
+       let output = "<strong>TECHNICAL SKILLS:</strong><br><div style='margin-top: 10px; padding-left: 10px;'>";
+       userData.skills.forEach(skill => {
+           output += `<span style="display: inline-block; background: var(--bright-black-color); color: var(--foreground-color); padding: 4px 12px; margin: 4px; border-radius: 4px; font-size: 0.9em;">${skill}</span>`;
+       });
+       output += "</div>";
+       return output;
+    },
+    description: "Technical skills and technologies."
+  },
+  recommendations: {
+    execute: () => {
+       if (!userData?.recommendations || userData.recommendations.length === 0) return "Data not available.";
+       
+       let output = "<strong>RECOMMENDATIONS:</strong><br>";
+       userData.recommendations.forEach(rec => {
+           output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
+<strong>${rec.name}</strong> | ${rec.role}<br>
+<em>"${rec.text}"</em><br>
+Email: <a href="mailto:${rec.email}">${rec.email}</a> | <a href="${rec.link}" target="_blank">View Letter</a>
+</div>`;
+       });
 
-       // Volunteering Section
+       // Volunteering
        if (userData.volunteering && userData.volunteering.length > 0) {
-           output += "<strong>MERITO SOCIAL (Voluntariado):</strong><br>";
+           output += "<br><strong>VOLUNTEERING:</strong><br>";
            userData.volunteering.forEach(vol => {
                output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
 <strong>${vol.role}</strong> | ${vol.program}<br>
-<em>${vol.organization}</em><br>
-<p>${vol.text}</p>
-<a href="${vol.link}" target="_blank">Ver Documento de Verificação</a>
-</div>`;
-           });
-       }
-
-       // Recommendations Section
-       if (userData.recommendations && userData.recommendations.length > 0) {
-           output += "<strong>CARTAS DE RECOMENDACAO:</strong><br>";
-           userData.recommendations.forEach(rec => {
-               output += `<div style="margin-top: 10px; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--green-color);">
-<strong>${rec.name}</strong> | ${rec.role}<br>
-<em>"${rec.text}"</em><br>
-Email: <a href="mailto:${rec.email}">${rec.email}</a> | <a href="${rec.link}" target="_blank">Ver Carta Oficial</a>
+<em>${vol.organization}</em> | <span style="color: var(--bright-black-color);">${vol.period}</span><br>
+<span style="color: var(--white-color);">${vol.text}</span>
 </div>`;
            });
        }
        
        return output;
     },
-    description: "Atividades de merito social e cartas de recomendacao."
+    description: "Recommendations and volunteering."
   },
-  metas: {
-    execute: () => {
-       if (!isUserDataAvailable("details")) return "Dados nao disponiveis.";
-       return `<strong>AS MINHAS METAS:</strong><br>${userData.details.goals.replace(/\n/g, '<br>')}`;
-    },
-    description: "Objetivos para a Bolsa de Merito e futuro."
-  },
-  quem : {
+  whoami: {
     execute: () => {
       if (!isUserDataAvailable()) {
-        return "ALERTA: Dados do utilizador nao encontrados.";
+        return "Error: User data not found.";
       }
       return `<table>
-        <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Nome:</td><td class="description" style="padding-left: 0;">${userData.name}</td></tr>
+        <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Name:</td><td class="description" style="padding-left: 0;">${userData.name}</td></tr>
         <tr><td colspan="2"><hr style="border: 0; border-top: 1px solid var(--bright-black-color); margin: 5px 0;"></td></tr>
         <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Email:</td><td class="description" style="padding-left: 0;">${userData.email}</td></tr>
         <tr><td colspan="2"><hr style="border: 0; border-top: 1px solid var(--bright-black-color); margin: 5px 0;"></td></tr>
         <tr><td class="name" style="vertical-align: top; padding-right: 15px;">Bio:</td><td class="description" style="padding-left: 0;">${userData.bio}</td></tr>
       </table>`;
     },
-    description: "Informacao basica do utilizador."
+    description: "Basic user info card."
   },
-  redes : {
+  social: {
     execute: () => {
       if (!isUserDataAvailable("socials")) {
-        return "Erro: Links sociais nao encontrados.";
+        return "Error: Social links not found.";
       }
       let output = "<table>";
       let socials = userData.socials;
@@ -349,22 +568,31 @@ Email: <a href="mailto:${rec.email}">${rec.email}</a> | <a href="${rec.link}" ta
       output += "</table>";
       return output;
     },
-    "description": "Links para redes sociais e contactos.",
+    "description": "Social media links and contacts.",
   },
-  projetos : {
+  resume: {
     execute: () => {
-       // Debug logic: Check if userData exists and has projects
-       if (!userData || !userData.projects) {
-        return "Erro: Dados de projetos nao carregados ou vazios.";
+      if (userData?.socials?.CV?.url) {
+        window.open(userData.socials.CV.url, '_blank');
+        return "Opening CV in a new tab...";
       }
-      let output = "Aqui estao alguns dos meus projetos:\n<table>";
+      return "CV link not available.";
+    },
+    description: "Open CV/Resume in a new tab."
+  },
+  projects: {
+    execute: () => {
+       if (!userData || !userData.projects) {
+        return "Error: Project data not loaded.";
+      }
+      let output = "Here are some of my projects:\n<table>";
       userData.projects.forEach(project => {
-        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link"><a href="${project.link}" target="_blank">Ver</a></td></tr>`;
+        output += `<tr><td class="name">${project.name}</td><td class="description">${project.description}</td><td class="link"><a href="${project.link}" target="_blank">View</a></td></tr>`;
       });
       output += "</table>";
       return output;
     },
-    "description": "Lista de projetos tecnicos e competicoes."
+    "description": "Technical projects and competitions."
   }
 };
 
@@ -374,7 +602,7 @@ const isUserDataAvailable = (key) => {
 };
 
 // Load special commands from JSON file
-fetch('commands.json')
+fetch('src/config/commands.json')
   .then(response => response.json())
   .then(data => {
     // Set title if provided
@@ -541,9 +769,7 @@ window.addEventListener("load", (event) => {
 // Header is now displayed after loading commands.json
 commandLine.focus();
 
-terminal.addEventListener("click", function () {
-  commandLine.focus();
-});
+// No longer forcing focus on terminal clicks to prevent scroll-to-bottom and selection hijack issues.
 
 commandLine.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
@@ -587,7 +813,7 @@ commandLine.addEventListener("keydown", function (event) {
 
 function displayCommand(command) {
   const commandElement = document.createElement("p");
-  commandElement.innerHTML = `<span id="prompt">oeiras-valley@shell:~/bolsa-merito $</span> <span class="command">${command}</span>`;
+  commandElement.innerHTML = `<span id="prompt">crogued@portfolio:~ $</span> <span class="command">${command}</span>`;
   terminalOutput.appendChild(commandElement);
 }
 
@@ -843,19 +1069,27 @@ function setTheme(theme) {
 
 function getManualDescription(command) {
   const manuals = {
-    "sobre": "Exibe a biografia completa, historia de vida e resiliencia de Christian Rodrigues.",
-    "meritos": "Mostra os detalhes de envolvimento comunitario, voluntariado e cartas de recomendacao.",
-    "metas": "Lista os objetivos academicos e profissionais, incluindo o uso planeado da Bolsa de Merito.",
-    "projetos": "Apresenta uma lista detalhada dos projetos tecnicos, com links para GitHub e documentacao.",
-    "ls": "Lista todos os ficheiros virtuais disponiveis no diretorio atual. Use 'cat' para ler o conteudo.",
-    "cat": "Le o conteudo de um ficheiro especifico. Exemplo: 'cat bio.txt' ira mostrar a biografia.",
-    "help": "Mostra a lista de comandos e instrucoes de interacao.",
-    "clear": "Limpa todo o texto visivel no terminal.",
-    "date": "Mostra a data e hora atuais do sistema.",
-    "man": "Mostra o manual de utilizacao de um comando. Ex: 'man ls'.",
-    "history": "Mostra a lista dos ultimos comandos executados."
+    "about": "Displays the full biography, life story, and resilience of Christian Rodrigues.",
+    "experience": "Shows professional work experience with highlights and details.",
+    "education": "Displays academic background, grades, and coursework.",
+    "projects": "Lists technical projects with descriptions and GitHub links.",
+    "publications": "Shows research publications and papers.",
+    "certifications": "Lists professional certifications and credentials.",
+    "awards": "Displays honors, awards, and recognitions.",
+    "skills": "Shows technical skills and technologies.",
+    "recommendations": "Displays recommendation letters and volunteering activities.",
+    "ls": "Lists all virtual files available in the current directory. Use 'cat' to read their contents.",
+    "cat": "Reads a specific file's contents. Example: 'cat about.txt' will show the bio.",
+    "help": "Shows the list of commands and interaction instructions.",
+    "clear": "Clears all visible text in the terminal.",
+    "man": "Shows the usage manual for a command. Ex: 'man ls'.",
+    "history": "Shows the list of recently executed commands.",
+    "social": "Displays links to social media profiles and contacts.",
+    "whoami": "Shows basic user identification card.",
+    "resume": "Opens the CV/Resume document in a new browser tab.",
+    "games": "Shows the menu of available interactive games."
   };
-  return manuals[command] || "Sem descricao detalhada disponivel.";
+  return manuals[command] || "No detailed description available.";
 }
 
 function createMatrixEffect() {
@@ -1004,15 +1238,15 @@ function startRPS() {
         container.className = "rps-container";
         container.id = id;
         container.innerHTML = `
-            <button class="rps-btn" onclick="playRPS('${id}', 'rock')">Pedra</button>
-            <button class="rps-btn" onclick="playRPS('${id}', 'paper')">Papel</button>
-            <button class="rps-btn" onclick="playRPS('${id}', 'scissors')">Tesoura</button>
+            <button class="rps-btn" onclick="playRPS('${id}', 'rock')">Rock</button>
+            <button class="rps-btn" onclick="playRPS('${id}', 'paper')">Paper</button>
+            <button class="rps-btn" onclick="playRPS('${id}', 'scissors')">Scissors</button>
             <span class="rps-result" style="margin-left: 10px; align-self: center;"></span>
         `;
         terminalOutput.appendChild(container);
         scrollToBottom();
     }, 100);
-    return "Escolha a sua jogada:";
+    return "Choose your move:";
 }
 
 window.playRPS = function(id, playerMove) {
@@ -1027,21 +1261,21 @@ window.playRPS = function(id, playerMove) {
     btns.forEach(b => b.disabled = true);
 
     const translations = {
-        'rock': 'Pedra',
-        'paper': 'Papel',
-        'scissors': 'Tesoura'
+        'rock': 'Rock',
+        'paper': 'Paper',
+        'scissors': 'Scissors'
     };
 
     let result = "";
-    if (playerMove === aiMove) result = "Empate!";
+    if (playerMove === aiMove) result = "It's a tie!";
     else if (
         (playerMove === 'rock' && aiMove === 'scissors') ||
         (playerMove === 'paper' && aiMove === 'rock') ||
         (playerMove === 'scissors' && aiMove === 'paper')
-    ) result = "Ganhaste!";
-    else result = "Perdeste! AI escolheu " + translations[aiMove];
+    ) result = "You win!";
+    else result = "You lose! AI chose " + translations[aiMove];
 
-    resultSpan.innerHTML = `Tu: ${translations[playerMove]} | AI: ${translations[aiMove]} -> <strong>${result}</strong>`;
+    resultSpan.innerHTML = `You: ${translations[playerMove]} | AI: ${translations[aiMove]} -> <strong>${result}</strong>`;
 }
 
 // Tic Tac Toe
@@ -1066,7 +1300,7 @@ window.startTTT = function() {
         container.dataset.turn = 'X';
         container.dataset.active = 'true';
     }, 100);
-    return "Jogo do Galo iniciado! Tu és o X.";
+    return "Tic Tac Toe started! You are X.";
 }
 
 window.playTTT = function(id, index) {
@@ -1080,8 +1314,8 @@ window.playTTT = function(id, index) {
     board[index] = 'X';
     updateTTTBoard(container, board);
     
-    if(checkTTTWin(board, 'X')) { endGameTTT(container, "Ganhaste!"); return; }
-    if(!board.includes(null)) { endGameTTT(container, "Empate!"); return; }
+    if(checkTTTWin(board, 'X')) { endGameTTT(container, "You win!"); return; }
+    if(!board.includes(null)) { endGameTTT(container, "It's a tie!"); return; }
 
     // AI Move (Minimax)
     setTimeout(() => {
@@ -1114,8 +1348,8 @@ window.playTTT = function(id, index) {
         updateTTTBoard(container, board);
         container.dataset.board = JSON.stringify(board);
 
-        if(checkTTTWin(board, 'O')) { endGameTTT(container, "Perdeste!"); return; }
-        if(!board.includes(null)) { endGameTTT(container, "Empate!"); return; }
+        if(checkTTTWin(board, 'O')) { endGameTTT(container, "You lose!"); return; }
+        if(!board.includes(null)) { endGameTTT(container, "It's a tie!"); return; }
     }, 500);
     
     container.dataset.board = JSON.stringify(board);
@@ -1204,7 +1438,7 @@ window.startSimon = function() {
         
         nextSimonRound(id);
     }, 100);
-    return "Simon Says iniciado! Presta atenção à sequência.";
+    return "Simon Says started! Pay attention to the sequence.";
 }
 
 function nextSimonRound(id) {
@@ -1243,7 +1477,7 @@ window.handleSimonInput = function(id, color) {
     // Check input
     const idx = playerSequence.length - 1;
     if(playerSequence[idx] !== simonSequence[idx]) {
-        endSimonGame(container, `Game Over! Chegaste ao nível ${simonLevel}.`);
+        endSimonGame(container, `Game Over! You reached level ${simonLevel}.`);
         return;
     }
     
@@ -1261,3 +1495,180 @@ function endSimonGame(container, msg) {
     container.style.pointerEvents = 'none'; // Disable input
     scrollToBottom();
 }
+
+/* --- WATER DROPLET MOUSE INTERACTION PHYSICS --- */
+(function() {
+    const wrappers = document.querySelectorAll('.bubble-wrapper');
+    if (!wrappers.length) return;
+
+    let mouseX = -9999;
+    let mouseY = -9999;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    document.addEventListener('mouseleave', function() {
+        mouseX = -9999;
+        mouseY = -9999;
+    });
+
+    // Physics helper
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    // Per-bubble state
+    var drops = [];
+    wrappers.forEach(function(wrapper) {
+        drops.push({
+            wrapper: wrapper,
+            bubble: wrapper.querySelector('.glass-bubble'),
+            icon: wrapper.querySelector('.bubble-icon'),
+            // smoothed values
+            pushX: 0, pushY: 0,
+            iconOffX: 0, iconOffY: 0,
+            // 8 border-radius values: [TL-h, TL-v, TR-h, TR-v, BR-h, BR-v, BL-h, BL-v]
+            br: [50,50,50,50,50,50,50,50],
+            // track if CSS animation is currently paused
+            animPaused: false
+        });
+    });
+
+    // Corner angles (direction from center toward each corner)
+    var CORNER_ANGLES = [
+        Math.atan2(-1, -1),  // TL: -135°
+        Math.atan2(-1,  1),  // TR:  -45°
+        Math.atan2( 1,  1),  // BR:   45°
+        Math.atan2( 1, -1)   // BL:  135°
+    ];
+
+    function angleDist(a, b) {
+        var d = a - b;
+        while (d > Math.PI)  d -= 2 * Math.PI;
+        while (d < -Math.PI) d += 2 * Math.PI;
+        return Math.abs(d);
+    }
+
+    function tick() {
+        for (var d = 0; d < drops.length; d++) {
+            var drop = drops[d];
+            var rect = drop.wrapper.getBoundingClientRect();
+            var cx = rect.left + rect.width * 0.5;
+            var cy = rect.top  + rect.height * 0.5;
+            var r  = Math.max(rect.width, rect.height) * 0.5;
+
+            // Dynamically scale parameters based on bubble radius
+            var influenceRadius = r * 1.4; // px beyond edge, proportional to size
+            var indentMax = 45;            // max % indent on border-radius (concave dent)
+            var bulgeMax = 20;             // max % bulge on opposite corners
+            var pushMax = r * 0.22;        // max px the bubble pushes away (proportional to size)
+            var iconDodgeMax = r * 0.15;   // max px the icon dodges inside
+
+            var dx = mouseX - cx;
+            var dy = mouseY - cy;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+
+            // Normalized direction from center to mouse
+            var ndx = dist > 0.01 ? dx / dist : 0;
+            var ndy = dist > 0.01 ? dy / dist : 0;
+
+            // Influence falls off from bubble edge to influenceRadius beyond
+            var influence = Math.max(0, 1 - Math.max(0, dist - r * 0.3) / (r * 0.7 + influenceRadius));
+            // Extra factor when cursor is inside the bubble
+            var inside = Math.max(0, 1 - dist / r);
+
+            var smoothIn  = 0.12;  // how fast deformation ramps up
+            var smoothOut = 0.04;  // how slow it recovers (elastic/jiggly)
+
+            if (influence > 0.01) {
+                // Remove CSS morph animation name so our inline style wins with absolute priority
+                if (!drop.animPaused) {
+                    drop.bubble.style.animationName = 'none';
+                    drop.animPaused = true;
+                }
+
+                // --- Push away ---
+                var tPushX = -ndx * pushMax * influence;
+                var tPushY = -ndy * pushMax * influence;
+                drop.pushX = lerp(drop.pushX, tPushX, smoothIn);
+                drop.pushY = lerp(drop.pushY, tPushY, smoothIn);
+
+                // --- Icon dodge ---
+                var tIconX = -ndx * iconDodgeMax * influence;
+                var tIconY = -ndy * iconDodgeMax * influence;
+                drop.iconOffX = lerp(drop.iconOffX, tIconX, smoothIn);
+                drop.iconOffY = lerp(drop.iconOffY, tIconY, smoothIn);
+
+                // --- Border-radius splitting ---
+                var mouseAngle = Math.atan2(dy, dx);
+                // Combined deformation intensity: stronger when inside
+                var intensity = influence * (0.4 + inside * 0.6);
+
+                for (var c = 0; c < 4; c++) {
+                    var aDist = angleDist(CORNER_ANGLES[c], mouseAngle);
+                    // closeness: 1.0 when corner faces the mouse, 0 when opposite
+                    var closeness = Math.max(0, 1 - aDist / (Math.PI * 0.6));
+                    // opposite-ness: corners far from mouse bulge out
+                    var farness = Math.max(0, aDist / Math.PI - 0.3) / 0.7;
+
+                    var indent = indentMax * closeness * intensity;
+                    var bulge  = bulgeMax  * farness   * intensity;
+
+                    var targetH = 50 - indent + bulge;
+                    var targetV = 50 - indent * 0.8 + bulge * 0.6;
+
+                    // Clamp to sane range
+                    targetH = Math.max(10, Math.min(90, targetH));
+                    targetV = Math.max(10, Math.min(90, targetV));
+
+                    drop.br[c * 2]     = lerp(drop.br[c * 2],     targetH, smoothIn);
+                    drop.br[c * 2 + 1] = lerp(drop.br[c * 2 + 1], targetV, smoothIn);
+                }
+            } else {
+                // Return to neutral with slow elastic recovery
+                drop.pushX   = lerp(drop.pushX,   0, smoothOut);
+                drop.pushY   = lerp(drop.pushY,   0, smoothOut);
+                drop.iconOffX = lerp(drop.iconOffX, 0, smoothOut);
+                drop.iconOffY = lerp(drop.iconOffY, 0, smoothOut);
+
+                for (var c = 0; c < 8; c++) {
+                    drop.br[c] = lerp(drop.br[c], 50, smoothOut);
+                }
+
+                // Resume CSS animation once values are near neutral
+                var totalDrift = Math.abs(drop.pushX) + Math.abs(drop.pushY);
+                for (var c = 0; c < 8; c++) totalDrift += Math.abs(drop.br[c] - 50);
+                if (drop.animPaused && totalDrift < 1) {
+                    drop.bubble.style.animationName = '';
+                    drop.bubble.style.borderRadius = '';
+                    drop.animPaused = false;
+                }
+            }
+
+            // --- Apply push ---
+            drop.wrapper.style.setProperty('--mouse-tx', drop.pushX + 'px');
+            drop.wrapper.style.setProperty('--mouse-ty', drop.pushY + 'px');
+
+            // --- Apply border-radius deformation ---
+            if (drop.animPaused) {
+                var b = drop.br;
+                drop.bubble.style.borderRadius =
+                    b[0]+'% '+b[2]+'% '+b[4]+'% '+b[6]+'% / '+
+                    b[1]+'% '+b[3]+'% '+b[5]+'% '+b[7]+'%';
+            }
+
+            // --- Apply icon dodge ---
+            if (drop.icon) {
+                var iTotal = Math.abs(drop.iconOffX) + Math.abs(drop.iconOffY);
+                if (iTotal > 0.3) {
+                    drop.icon.style.transform = 'translate('+drop.iconOffX+'px,'+drop.iconOffY+'px)';
+                } else {
+                    drop.icon.style.transform = '';
+                }
+            }
+        }
+
+        requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+})();
